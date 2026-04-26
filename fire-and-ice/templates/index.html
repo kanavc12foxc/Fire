@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote for Amogh - Fire & Ice</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i data-lucide="shield" class="text-fire" style="margin-right: 4px;"></i>
+            <span class="brand">Fire & Ice</span>
+        </div>
+        <button class="hamburger" onclick="toggleNav()"><i data-lucide="menu"></i></button>
+        <ul class="nav-links" id="nav-menu">
+            <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+            <li><a href="#about" class="nav-link" data-page="about">About</a></li>
+            <li><a href="#manifesto" class="nav-link" data-page="manifesto">Manifesto</a></li>
+            <li class="dropdown">
+                <a href="#" class="nav-link">Student Hub ▼</a>
+                <div class="dropdown-content">
+                    <a href="#pulse" class="nav-link" data-page="pulse"><i data-lucide="bar-chart-2"></i> Pulse (Polls)</a>
+                    <a href="#idea-box" class="nav-link" data-page="idea-box"><i data-lucide="lightbulb"></i> Idea Box</a>
+                    <a href="#lost-found" class="nav-link" data-page="lost-found"><i data-lucide="search"></i> Lost & Found</a>
+                    <a href="#study-groups" class="nav-link" data-page="study-groups"><i data-lucide="users"></i> Study Groups</a>
+                </div>
+            </li>
+            <li><a href="#action-board" class="nav-link" data-page="action-board">Action Board</a></li>
+            <li><a href="#feedback" class="btn btn-primary btn-nav-cta" onclick="navigate('feedback')">Speak Anonymously</a></li>
+        </ul>
+    </nav>
+
+    <main id="app-content">
+        <!-- Home Page -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <h1>Vote for <span class="text-fire">Amogh</span>. Vote for <span class="text-ice">Fire & Ice</span>.</h1>
+                <p class="slogan">"<span class="slogan-fire">Fire to act.</span> <span class="slogan-ice">Ice to listen.</span>"</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="navigate('feedback')">Speak Anonymously</button>
+                    <button class="btn btn-secondary" onclick="navigate('support')">Support the Campaign</button>
+                </div>
+            </div>
+            
+            <div class="quick-links">
+                <a href="#idea-box" onclick="navigate('idea-box')" class="quick-link-btn"><i data-lucide="lightbulb"></i> Idea Box</a>
+                <a href="#lost-found" onclick="navigate('lost-found')" class="quick-link-btn"><i data-lucide="search"></i> Lost & Found</a>
+                <a href="#study-groups" onclick="navigate('study-groups')" class="quick-link-btn"><i data-lucide="users"></i> Study Groups</a>
+            </div>
+
+            <div class="features" style="margin-top: 3rem;">
+                <div class="card card-info">
+                    <h3><i data-lucide="trending-up" class="text-ice"></i> Pulse Snapshot</h3>
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-label);">Top priority issues voted by students</p>
+                    <div id="home-pulse-snapshot">Loading...</div>
+                    <button class="btn btn-secondary w-100" style="margin-top: 1.5rem;" onclick="navigate('pulse')">Vote Now</button>
+                </div>
+                <div class="card card-urgent">
+                    <h3><i data-lucide="flame" class="text-fire"></i> Action Driven</h3>
+                    <p>We believe in swift actions, accountability, and getting things done.</p>
+                </div>
+                <div class="card card-info">
+                    <h3><i data-lucide="snowflake" class="text-ice"></i> Compassionate</h3>
+                    <p>We provide a safe, calm space to listen to your concerns without judgment.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about" class="page">
+            <h2><i data-lucide="user"></i> About Amogh</h2>
+            <div class="card">
+                <p>Amogh is running to bring a balance of decisive action (<span class="text-fire">Fire</span>) and empathetic listening (<span class="text-ice">Ice</span>) to our school.</p>
+                <p>A leader who doesn't just promise but delivers while keeping your well-being in mind.</p>
+            </div>
+        </section>
+
+        <!-- Manifesto Page -->
+        <section id="manifesto" class="page">
+            <h2><i data-lucide="book-open"></i> Campaign Promises</h2>
+            <div class="manifesto-grid">
+                <div class="card">
+                    <h4><i data-lucide="shield-check" class="text-ice"></i> Student Safety</h4>
+                    <p>A zero-tolerance policy towards harassment with safe spaces for all.</p>
+                </div>
+                <div class="card card-urgent">
+                    <h4><i data-lucide="shield-alert" class="text-fire"></i> Anti-bullying System</h4>
+                    <p>Proactive AI-assisted anonymous reporting to protect identities.</p>
+                </div>
+                <div class="card">
+                    <h4><i data-lucide="message-square" class="text-ice"></i> Better Communication</h4>
+                    <p>Transparent action boards showing exactly what the council is working on.</p>
+                </div>
+                <div class="card">
+                    <h4><i data-lucide="mic" class="text-ice"></i> Student Voice</h4>
+                    <p>Regular town halls and an open-door policy for everyone.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Anonymous Feedback Page -->
+        <section id="feedback" class="page">
+            <h2><i data-lucide="user-x"></i> Speak Anonymously</h2>
+            <p style="margin-bottom: 2rem;">Your identity is safe. Tell us what needs to change.</p>
+            
+            <form id="feedback-form" class="card form-container card-urgent">
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="f-category" required>
+                        <option value="bullying">Bullying/Harassment</option>
+                        <option value="academics">Academics</option>
+                        <option value="facilities">Facilities</option>
+                        <option value="suggestion">General Suggestion</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea id="f-message" rows="5" required placeholder="Describe your concern..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Urgency Level</label>
+                    <select id="f-urgency">
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Grade/Class (Optional)</label>
+                    <input type="text" id="f-grade" placeholder="e.g. 10th Grade">
+                </div>
+                <button type="submit" class="btn btn-primary w-100" id="submit-feedback-btn">Submit Feedback</button>
+                <p id="feedback-result" class="result-msg"></p>
+            </form>
+        </section>
+
+        <!-- Case Tracking Page -->
+        <section id="tracking" class="page">
+            <h2><i data-lucide="crosshair"></i> Track Your Case</h2>
+            <div class="card form-container card-info">
+                <div class="form-group">
+                    <label>Enter Case ID</label>
+                    <input type="text" id="t-caseid" placeholder="e.g. FI-8K29Q">
+                </div>
+                <button class="btn btn-secondary w-100" onclick="trackCase()">Track Status</button>
+                <div id="tracking-result" class="result-msg tracking-box"></div>
+            </div>
+        </section>
+
+        <!-- Support Page -->
+        <section id="support" class="page">
+            <h2><i data-lucide="heart"></i> Pledge Your Support</h2>
+            <div class="card text-center">
+                <h1 id="support-counter" style="font-size: 4rem; color: var(--ice-color); justify-content: center;">--</h1>
+                <p style="margin-bottom: 2rem;">Students supporting Fire & Ice</p>
+                <button class="btn btn-primary" onclick="pledgeSupport()" id="pledge-btn">Support Now</button>
+                <p id="support-msg" class="result-msg"></p>
+            </div>
+        </section>
+
+        <!-- Announcements Page -->
+        <section id="announcements" class="page">
+            <h2><i data-lucide="bell"></i> Latest Updates</h2>
+            <div id="announcements-list" class="feed-list" style="margin-top: 2rem;">
+                <p>Loading announcements...</p>
+            </div>
+        </section>
+
+        <!-- Action Board Page -->
+        <section id="action-board" class="page">
+            <h2><i data-lucide="clipboard-list"></i> Public Action Board</h2>
+            <p style="margin-bottom: 2rem;">Anonymized view of issues we are actively working on.</p>
+            <div class="card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Concern Area</th>
+                            <th>Current Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="action-table-body">
+                        <tr><td colspan="2">Loading...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Pulse Page -->
+        <section id="pulse" class="page">
+            <h2><i data-lucide="bar-chart-2"></i> Pulse: Student Issues</h2>
+            <div class="card card-info" style="margin-bottom: 2rem; background: var(--ice-tint);">
+                <p><strong>Your votes shape the manifesto. Top 3 issues get priority attention.</strong></p>
+            </div>
+            <div id="pulse-list">Loading issues...</div>
+        </section>
+
+        <!-- Idea Box Page -->
+        <section id="idea-box" class="page">
+            <h2><i data-lucide="lightbulb"></i> Idea Box</h2>
+            <p style="margin-bottom: 2rem;">Share constructive suggestions for our school. (Separate from complaints).</p>
+            
+            <form id="idea-form" class="card form-container">
+                <div class="form-group">
+                    <label>Title of Idea (Max 60 chars)</label>
+                    <input type="text" id="i-title" maxlength="60" required>
+                </div>
+                <div class="form-group">
+                    <label>Description (Max 300 chars)</label>
+                    <textarea id="i-desc" rows="3" maxlength="300" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="i-category">
+                        <option value="Academic">Academic</option>
+                        <option value="Facilities">Facilities</option>
+                        <option value="Events">Events</option>
+                        <option value="Wellbeing">Wellbeing</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Impact Level</label>
+                    <select id="i-impact">
+                        <option value="Small Win">Small Win</option>
+                        <option value="Medium Change">Medium Change</option>
+                        <option value="Big Vision">Big Vision</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-secondary w-100">Submit Idea</button>
+                <p id="idea-result" class="result-msg"></p>
+            </form>
+
+            <h3 style="margin-top: 4rem; margin-bottom: 1.5rem;"><i data-lucide="star"></i> Featured Ideas</h3>
+            <div id="featured-ideas-list">Loading...</div>
+        </section>
+
+        <!-- Lost & Found Page -->
+        <section id="lost-found" class="page">
+            <h2><i data-lucide="search"></i> Lost & Found</h2>
+            <p style="margin-bottom: 2rem;">Auto-expires after 14 days.</p>
+            
+            <div class="card form-container card-info" style="margin-bottom: 2rem;">
+                <form id="lf-form">
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select id="lf-type"><option value="Lost">I Lost Something</option><option value="Found">I Found Something</option></select>
+                    </div>
+                    <div class="form-group"><label>Item Name</label><input type="text" id="lf-item" required></div>
+                    <div class="form-group"><label>Location</label><input type="text" id="lf-loc" required></div>
+                    <div class="form-group"><label>Description (100 chars)</label><input type="text" id="lf-desc" maxlength="100" required></div>
+                    <div class="form-group"><label>Contact (Optional)</label><input type="text" id="lf-contact" placeholder="e.g. ask 9B"></div>
+                    <button type="submit" class="btn btn-primary w-100">Post Item</button>
+                    <p id="lf-result" class="result-msg"></p>
+                </form>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchLFTab('Lost')">Lost Items</button>
+                <button class="tab-btn" onclick="switchLFTab('Found')">Found Items</button>
+            </div>
+            <div id="lf-list">Loading...</div>
+        </section>
+
+        <!-- Study Groups Page -->
+        <section id="study-groups" class="page">
+            <h2 class="text-fire"><i data-lucide="users"></i> Learn Together. Rise Together.</h2>
+            <p style="margin-bottom: 2rem;">Find study partners or share notes. Posts expire after 7 days.</p>
+            
+            <div class="card form-container" style="margin-bottom: 2rem;">
+                <form id="sg-form">
+                    <div class="form-group"><label>Subject</label><input type="text" id="sg-subj" required></div>
+                    <div class="form-group"><label>Topic / Chapter</label><input type="text" id="sg-topic" required></div>
+                    <div class="form-group"><label>Looking For</label><input type="text" id="sg-look" placeholder="Study partner, notes..." required></div>
+                    <div class="form-group"><label>Grade / Class</label><input type="text" id="sg-grade" required></div>
+                    <div class="form-group"><label>Preferred Time</label><input type="text" id="sg-time" placeholder="Weekends, Afternoons..." required></div>
+                    <button type="submit" class="btn btn-secondary w-100">Post Request</button>
+                    <p id="sg-result" class="result-msg"></p>
+                </form>
+            </div>
+
+            <div id="sg-list" class="pinboard">Loading...</div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="#home" onclick="navigate('home')">Home</a>
+                <a href="#about" onclick="navigate('about')">About Amogh</a>
+                <a href="#manifesto" onclick="navigate('manifesto')">Manifesto</a>
+            </div>
+            <div class="footer-col">
+                <h4>Student Hub</h4>
+                <a href="#pulse" onclick="navigate('pulse')">Pulse Poll</a>
+                <a href="#idea-box" onclick="navigate('idea-box')">Idea Box</a>
+                <a href="#lost-found" onclick="navigate('lost-found')">Lost & Found</a>
+                <a href="#study-groups" onclick="navigate('study-groups')">Study Groups</a>
+            </div>
+            <div class="footer-col">
+                <h4>Safety & Contact</h4>
+                <a href="#feedback" onclick="navigate('feedback')">Speak Anonymously</a>
+                <a href="#tracking" onclick="navigate('tracking')">Track a Case</a>
+                <a href="/admin">Admin Portal</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div style="display:flex; align-items:center; gap:8px;">
+                Built by the <span class="footer-brand">Fire & Ice</span> team <i data-lucide="flame" size="16" class="text-fire"></i><i data-lucide="snowflake" size="16" class="text-ice"></i>
+            </div>
+            <div>&copy; 2026 Vote for Amogh. All rights reserved.</div>
+            <a href="#" onclick="window.location.replace('https://www.google.com')" style="color:#888888; text-decoration:none; display:flex; align-items:center; gap:4px;"><i data-lucide="log-out" size="14"></i> Quick Exit</a>
+        </div>
+    </footer>
+
+    <button class="quick-exit" onclick="window.location.replace('https://www.google.com')" title="Leave this page instantly"><i data-lucide="x" size="16"></i> Quick Exit</button>
+
+    <script src="/static/wordlist.js"></script>
+    <script src="/static/filter.js"></script>
+    <script src="/static/app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Fire & Ice</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .admin-layout { display: none; }
+        .login-layout { display: block; max-width: 400px; margin: 4rem auto; text-align: center; }
+        .table-responsive { overflow-x: auto; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span class="school-logo">🛡️</span>
+            <span class="brand">Admin Dashboard</span>
+        </div>
+        <ul class="nav-links admin-layout">
+            <li><a href="#" onclick="logout()" style="color: var(--fire-color);">Logout</a></li>
+        </ul>
+    </nav>
+
+    <main id="app-content">
+        <!-- Login Section -->
+        <section id="login-section" class="login-layout card">
+            <h2>Admin Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <input type="password" id="admin-pass" placeholder="Enter Admin Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <p id="login-msg" class="result-msg"></p>
+            </form>
+        </section>
+
+        <!-- Admin Dashboard -->
+        <section id="dashboard-section" class="admin-layout" style="max-width: 1000px; margin: 2rem auto; padding: 1rem;">
+            <h2>Feedback Cases</h2>
+            <div class="card table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Case ID</th>
+                            <th>Date</th>
+                            <th>Category</th>
+                            <th>Urgency</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feedback-table-body">
+                        <tr><td colspan="6">Loading cases...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2 style="margin-top: 3rem;">Post Announcement</h2>
+            <div class="card form-container" style="margin: 0;">
+                <form id="announcement-form">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" id="a-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="a-desc" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-secondary w-100">Post Announcement</button>
+                    <p id="announcement-msg" class="result-msg"></p>
+                </form>
+            </div>
+            <h2 style="margin-top: 3rem;">Pulse Results</h2>
+            <div class="card table-responsive">
+                <table class="data-table">
+                    <thead><tr><th>Issue</th><th>Votes</th></tr></thead>
+                    <tbody id="pulse-table-body"><tr><td colspan="2">Loading...</td></tr></tbody>
+                </table>
+            </div>
+
+            <h2 style="margin-top: 3rem;">Idea Box Manager</h2>
+            <div class="card table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Idea ID</th>
+                            <th>Title & Desc</th>
+                            <th>Category & Impact</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ideas-table-body"><tr><td colspan="4">Loading...</td></tr></tbody>
+                </table>
+            </div>
+
+            <h2 style="margin-top: 3rem;">Lost & Found Manager</h2>
+            <div class="card table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Item & Desc</th>
+                            <th>Contact</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lf-table-body"><tr><td colspan="4">Loading...</td></tr></tbody>
+                </table>
+            </div>
+        <h2 style="margin-top: 3rem;">Filter Logs</h2>
+            <div class="card table-responsive">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Form</th>
+                            <th>Reason</th>
+                            <th>Flagged Tokens</th>
+                            <th>Submission Snippet</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="filter-logs-body"><tr><td colspan="6">Loading...</td></tr></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/admin.js"></script>
+</body>
+</html>
