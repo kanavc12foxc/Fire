@@ -29,156 +29,264 @@ async function logout() {
 function showDashboard() {
     document.getElementById('login-section').style.display = 'none';
     document.querySelectorAll('.admin-layout').forEach(el => el.style.display = 'block');
-    loadFeedback();
-    loadAdminPulse();
-    loadAdminIdeas();
-    loadAdminLF();
-    loadFilterLogs();
+    switchAdminTab('submissions');
 }
 
-async function loadFeedback() {
-    const tbody = document.getElementById('feedback-table-body');
+function switchAdminTab(tabId) {
+    document.querySelectorAll('#admin-tabs .tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    document.querySelectorAll('.admin-tab-content').forEach(content => content.style.display = 'none');
+    document.getElementById('tab-' + tabId).style.display = 'block';
+    
+    if (tabId === 'submissions') loadSubmissions('feedback');
+    if (tabId === 'polls') loadAdminPolls();
+    if (tabId === 'tasks') loadAdminTasks();
+    if (tabId === 'filter') loadFilterLogs();
+}
+
+// --- SUBMISSIONS MANAGER ---
+
+let currentSubmissionsTable = 'feedback';
+
+async function loadSubmissions(table) {
+    currentSubmissionsTable = table;
+    const tbody = document.getElementById('submissions-table-body');
+    tbody.innerHTML = '<tr><td colspan="4">Loading...</td></tr>';
+    
+    // update inner tabs
+    document.querySelectorAll('#tab-submissions .tabs .tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.toLowerCase().includes(table.split('_')[0])) btn.classList.add('active');
+    });
+
+    closeResponsePanel();
+
     try {
-        const res = await fetch('/api/admin/feedback');
-        if (res.status === 401) { logout(); return; }
-        
+        let endpoint = '/api/admin/ideas';
+        if (table === 'feedback') endpoint = '/api/admin/feedback';
+        else if (table === 'lost_found') endpoint = '/api/lost_found';
+        else if (table === 'study_groups') endpoint = '/api/study_groups';
+
+        const res = await fetch(endpoint);
         const data = await res.json();
+        
         if (data.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6">No feedback received yet.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="4">No submissions found.</td></tr>';
             return;
         }
-        
-        tbody.innerHTML = data.map(item => `
-            <tr style="${item.is_spam ? 'opacity: 0.5; background: #fee2e2;' : ''}">
-                <td><strong>${item.case_id}</strong></td>
-                <td>${new Date(item.created_at).toLocaleDateString()}</td>
-                <td>${item.category}</td>
-                <td>${item.urgency}</td>
-                <td style="max-width: 300px;">${item.message} ${item.is_spam ? '<br><span style="color:red; font-size:12px;">(FLAGGED SPAM)</span>' : ''}</td>
-                <td>
-                    <select onchange="updateStatus('${item.id}', this.value)" style="padding:0.25rem;">
-                        <option value="Received" ${item.status === 'Received' ? 'selected' : ''}>Received</option>
-                        <option value="Under Review" ${item.status === 'Under Review' ? 'selected' : ''}>Under Review</option>
-                        <option value="Escalated" ${item.status === 'Escalated' ? 'selected' : ''}>Escalated</option>
-                        <option value="Resolved" ${item.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
-                    </select>
-                </td>
-            </tr>
-        `).join('');
+
+        tbody.innerHTML = data.map(i => {
+            const id = i.case_id || i.idea_id || i.tracking_id || i.id;
+            const content = i.message || i.description || i.item_name || i.topic || 'No description';
+            const status = i.status || (i.type ? 'Active' : 'N/A');
+            const priority = i.priority || 'Medium';
+            const date = new Date(i.created_at || i.date_posted).toLocaleDateString();
+
+            return `
+                <tr style="${i.is_spam ? 'opacity: 0.5; background: #fee2e2;' : ''}">
+                    <td><strong>${id}</strong><br><small class="text-muted">${date}</small></td>
+                    <td style="max-width: 250px;">
+                        ${i.title ? `<strong>${i.title}</strong><br>` : ''}
+                        <small>${content.substring(0, 60)}...</small>
+                    </td>
+                    <td>
+                        <span class="badge ${status==='Resolved'?'badge-success':'badge-ice'}">${status}</span><br>
+                        <span class="badge" style="background:transparent; border:1px solid #ccc; margin-top:4px;">${priority}</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-secondary" style="padding:4px 8px; font-size:0.8rem;" onclick='openResponsePanel(${JSON.stringify(i).replace(/'/g, "&apos;")}, "${table}")'>Manage</button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
     } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="6" class="error-text">Failed to load feedback.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="4" class="error-text">Failed to load data.</td></tr>';
     }
 }
 
-async function updateStatus(id, newStatus) {
+function openResponsePanel(item, table) {
+    const panel = document.getElementById('response-panel');
+    const title = document.getElementById('panel-title');
+    const desc = document.getElementById('panel-desc');
+    
+    document.getElementById('r-table').value = table;
+    document.getElementById('r-id').value = item.id;
+    
+    document.getElementById('r-priority').value = item.priority || 'Medium';
+    
+    let statusOpts = '';
+    if (table === 'feedback') statusOpts = '<option value="Received">Received</option><option value="Under Review">Under Review</option><option value="Escalated">Escalated</option><option value="Resolved">Resolved</option>';
+    else if (table === 'ideas') statusOpts = '<option value="Received">Received</option><option value="Acknowledged">Acknowledged</option><option value="Being Explored">Being Explored</option><option value="Implemented">Implemented</option>';
+    else if (table === 'lost_found') statusOpts = '<option value="Posted">Posted</option><option value="Active">Active</option><option value="Claimed">Claimed</option><option value="Expired">Expired</option>';
+    else if (table === 'study_groups') statusOpts = '<option value="Posted">Posted</option><option value="Active">Active</option><option value="Matched">Matched</option><option value="Expired">Expired</option>';
+    
+    document.getElementById('r-status').innerHTML = statusOpts;
+    document.getElementById('r-status').value = item.status || 'Active';
+    document.getElementById('r-response').value = item.admin_response || '';
+    
+    const idDisplay = item.case_id || item.idea_id || item.tracking_id || item.id;
+    title.textContent = `Manage ${idDisplay}`;
+    desc.textContent = item.message || item.description || item.item_name || item.topic || '';
+    
+    panel.style.display = 'flex';
+    document.getElementById('r-result').innerHTML = '';
+}
+
+function closeResponsePanel() {
+    document.getElementById('response-panel').style.display = 'none';
+}
+
+document.getElementById('response-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const table = document.getElementById('r-table').value;
+    const id = document.getElementById('r-id').value;
+    const payload = {
+        priority: document.getElementById('r-priority').value,
+        status: document.getElementById('r-status').value,
+        admin_response: document.getElementById('r-response').value
+    };
+    
+    const btn = e.target.querySelector('button');
+    btn.textContent = 'Updating...';
     try {
-        await fetch(`/api/admin/feedback/${id}`, {
+        const res = await fetch(`/api/admin/submissions/${table}/${id}`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({status: newStatus})
+            body: JSON.stringify(payload)
         });
-        // Optionally show a toast notification here
-    } catch (err) {
-        alert("Failed to update status");
-    }
-}
-
-document.getElementById('announcement-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const title = document.getElementById('a-title').value;
-    const desc = document.getElementById('a-desc').value;
-    const msg = document.getElementById('announcement-msg');
-    
-    try {
-        const res = await fetch('/api/admin/announcements', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({title, description: desc})
-        });
-        
         if (res.ok) {
-            msg.innerHTML = '<span class="success-text">Announcement Posted!</span>';
-            document.getElementById('announcement-form').reset();
-            setTimeout(() => { msg.innerHTML = ''; }, 3000);
+            document.getElementById('r-result').innerHTML = '<span class="success-text">Updated successfully!</span>';
+            setTimeout(() => { loadSubmissions(currentSubmissionsTable); }, 1000);
         } else {
-            msg.innerHTML = '<span class="error-text">Failed to post</span>';
+            document.getElementById('r-result').innerHTML = '<span class="error-text">Failed to update</span>';
         }
-    } catch (err) {
-        msg.innerHTML = '<span class="error-text">Network error</span>';
+    } catch (e) {
+        document.getElementById('r-result').innerHTML = '<span class="error-text">Network error</span>';
     }
+    btn.textContent = 'Update Submission';
 });
 
-// --- NEW ADMIN FEATURES ---
+// --- POLLS MANAGER ---
 
-async function loadAdminPulse() {
-    const tbody = document.getElementById('pulse-table-body');
-    try {
-        const res = await fetch('/api/pulse');
-        const data = await res.json();
-        tbody.innerHTML = data.map(i => `<tr><td>${i.issue_name}</td><td>${i.votes}</td></tr>`).join('');
-    } catch (e) { tbody.innerHTML = '<tr><td colspan="2">Error loading pulse results</td></tr>'; }
+function togglePollOptions(type) {
+    const opts = document.getElementById('p-options-container');
+    if (type === 'Yes-No') opts.style.display = 'none';
+    else opts.style.display = 'block';
 }
 
-async function loadAdminIdeas() {
-    const tbody = document.getElementById('ideas-table-body');
+async function loadAdminPolls() {
+    const tbody = document.getElementById('polls-table-body');
     try {
-        const res = await fetch('/api/admin/ideas');
+        const res = await fetch('/api/polls');
         const data = await res.json();
-        if (data.length === 0) { tbody.innerHTML = '<tr><td colspan="4">No ideas submitted.</td></tr>'; return; }
+        if (data.length === 0) { tbody.innerHTML = '<tr><td colspan="4">No polls found.</td></tr>'; return; }
         
-        tbody.innerHTML = data.map(i => `
-            <tr style="${i.is_spam ? 'opacity:0.5; background:#fee2e2;' : ''}">
-                <td><strong>${i.idea_id}</strong></td>
-                <td><strong>${i.title}</strong><br><span style="font-size:0.85rem;">${i.description}</span> ${i.is_spam ? '<span style="color:red; font-size:12px;">(FLAGGED SPAM)</span>' : ''}</td>
-                <td>Cat: ${i.category}<br>Impact: ${i.impact}</td>
+        tbody.innerHTML = data.map(p => {
+            const total = p.options ? p.options.reduce((sum, o) => sum + (o.votes || 0), 0) : 0;
+            return `
+            <tr>
+                <td><strong>${p.question}</strong><br><small class="text-muted">${new Date(p.created_at).toLocaleDateString()}</small></td>
+                <td><span class="badge badge-info">${p.type}</span></td>
+                <td><span class="badge ${p.status==='Active'?'badge-fire':''}">${p.status}</span></td>
+                <td>${total}</td>
+            </tr>
+        `}).join('');
+    } catch(e) { tbody.innerHTML = '<tr><td colspan="4">Error loading polls</td></tr>'; }
+}
+
+document.getElementById('create-poll-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const type = document.getElementById('p-type').value;
+    const optsInput = document.getElementById('p-options').value;
+    let options = [];
+    if (type === 'Yes-No') options = ['Yes', 'No'];
+    else options = optsInput.split(',').map(s => s.trim()).filter(s => s);
+    
+    if (type !== 'Yes-No' && options.length < 2) {
+        document.getElementById('p-result').innerHTML = '<span class="error-text">Provide at least 2 options</span>';
+        return;
+    }
+    
+    const payload = {
+        question: document.getElementById('p-question').value,
+        type: type,
+        status: document.getElementById('p-status').value,
+        options: options
+    };
+    
+    try {
+        const res = await fetch('/api/polls', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+        if (res.ok) {
+            document.getElementById('create-poll-form').reset();
+            document.getElementById('p-result').innerHTML = '<span class="success-text">Poll created!</span>';
+            loadAdminPolls();
+        }
+    } catch(e) { document.getElementById('p-result').innerHTML = '<span class="error-text">Failed to create poll</span>'; }
+});
+
+// --- TASKS MANAGER ---
+
+async function loadAdminTasks() {
+    const tbody = document.getElementById('tasks-table-body');
+    try {
+        const res = await fetch('/api/tasks');
+        const data = await res.json();
+        if (data.length === 0) { tbody.innerHTML = '<tr><td colspan="5">No tasks found.</td></tr>'; return; }
+        
+        tbody.innerHTML = data.map(t => {
+            let statusBadge = t.status === 'Completed' ? 'badge-success' : 'badge-ice';
+            if (t.status === 'Planned') statusBadge = '';
+            if (t.status === 'Blocked') statusBadge = 'badge-fire';
+            return `
+            <tr>
+                <td><strong>${t.title}</strong></td>
+                <td>${t.focus_area}</td>
+                <td><span class="badge ${statusBadge}">${t.status}</span></td>
+                <td>${t.assignee || 'Unassigned'}</td>
                 <td>
-                    <select onchange="updateIdeaStatus('${i.id}', this.value)" style="padding:0.25rem;">
-                        <option value="Under Review" ${i.status === 'Under Review' ? 'selected' : ''}>Under Review</option>
-                        <option value="Acknowledged" ${i.status === 'Acknowledged' ? 'selected' : ''}>Acknowledged</option>
-                        <option value="Being explored" ${i.status === 'Being explored' ? 'selected' : ''}>Being explored</option>
+                    <select onchange="updateTaskStatus('${t.id}', this.value)" style="padding:4px;">
+                        <option value="Planned" ${t.status==='Planned'?'selected':''}>Planned</option>
+                        <option value="In Progress" ${t.status==='In Progress'?'selected':''}>In Progress</option>
+                        <option value="Blocked" ${t.status==='Blocked'?'selected':''}>Blocked</option>
+                        <option value="Completed" ${t.status==='Completed'?'selected':''}>Completed</option>
                     </select>
                 </td>
             </tr>
-        `).join('');
-    } catch (e) { tbody.innerHTML = '<tr><td colspan="4">Error loading ideas</td></tr>'; }
+        `}).join('');
+    } catch(e) { tbody.innerHTML = '<tr><td colspan="5">Error loading tasks</td></tr>'; }
 }
 
-async function updateIdeaStatus(id, newStatus) {
+async function updateTaskStatus(id, status) {
     try {
-        await fetch(`/api/admin/ideas/${id}`, {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({status: newStatus})
-        });
-    } catch (err) { alert("Failed to update status"); }
+        await fetch('/api/tasks', { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({id, status})});
+    } catch(e) { alert("Failed to update task"); }
 }
 
-async function loadAdminLF() {
-    const tbody = document.getElementById('lf-table-body');
+document.getElementById('create-task-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const stInput = document.getElementById('tk-subtasks').value;
+    const subtasks = stInput.split(',').map(s => s.trim()).filter(s => s);
+    
+    const payload = {
+        title: document.getElementById('tk-title').value,
+        focus_area: document.getElementById('tk-focus').value,
+        assignee: document.getElementById('tk-assignee').value,
+        status: document.getElementById('tk-status').value,
+        subtasks: subtasks
+    };
+    
     try {
-        const res = await fetch('/api/lost_found');
-        const data = await res.json();
-        if (data.length === 0) { tbody.innerHTML = '<tr><td colspan="4">No items posted.</td></tr>'; return; }
-        
-        tbody.innerHTML = data.map(i => `
-            <tr>
-                <td>${i.type}</td>
-                <td><strong>${i.item_name}</strong><br><span style="font-size:0.85rem;">Loc: ${i.location} | Desc: ${i.description}</span></td>
-                <td>${i.contact || 'N/A'}</td>
-                <td><button onclick="deleteLF('${i.id}')" class="btn" style="background:#ef4444; color:white; padding:0.25rem 0.5rem; font-size:0.8rem;">Remove</button></td>
-            </tr>
-        `).join('');
-    } catch (e) { tbody.innerHTML = '<tr><td colspan="4">Error loading L&F</td></tr>'; }
-}
+        const res = await fetch('/api/tasks', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+        if (res.ok) {
+            document.getElementById('create-task-form').reset();
+            document.getElementById('tk-result').innerHTML = '<span class="success-text">Task created!</span>';
+            loadAdminTasks();
+        }
+    } catch(e) { document.getElementById('tk-result').innerHTML = '<span class="error-text">Failed to create task</span>'; }
+});
 
-async function deleteLF(id) {
-    if(!confirm("Are you sure you want to remove this item?")) return;
-    try {
-        await fetch(`/api/admin/lost_found/${id}`, { method: 'DELETE' });
-        loadAdminLF();
-    } catch (err) { alert("Failed to delete"); }
-}
-
+// --- FILTER LOGS ---
 async function loadFilterLogs() {
     const tbody = document.getElementById('filter-logs-body');
     try {
@@ -213,7 +321,7 @@ async function markFalsePositive(token) {
         });
         if (res.ok) {
             alert('Added to whitelist! It will take effect on next client load.');
-            loadFilterLogs(); // Refresh
+            loadFilterLogs(); 
         } else {
             alert("Failed to whitelist.");
         }
@@ -221,3 +329,24 @@ async function markFalsePositive(token) {
         alert("Network error.");
     }
 }
+
+document.getElementById('announcement-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const title = document.getElementById('a-title').value;
+    const desc = document.getElementById('a-desc').value;
+    const msg = document.getElementById('announcement-msg');
+    try {
+        const res = await fetch('/api/admin/announcements', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({title, description: desc})
+        });
+        if (res.ok) {
+            msg.innerHTML = '<span class="success-text">Announcement Posted!</span>';
+            document.getElementById('announcement-form').reset();
+            setTimeout(() => { msg.innerHTML = ''; }, 3000);
+        } else {
+            msg.innerHTML = '<span class="error-text">Failed to post</span>';
+        }
+    } catch (err) { msg.innerHTML = '<span class="error-text">Network error</span>'; }
+});

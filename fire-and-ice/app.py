@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, jsonify, session, redirect
 from supabase import create_client, Client
 from dotenv import load_dotenv
 from openai import OpenAI
+from datetime import datetime
 
 load_dotenv()
 
@@ -16,12 +17,9 @@ url: str = os.environ.get("SUPABASE_URL")
 key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
 
-# Removed OpenAI to enforce pure client-side moderation as requested.
-# The server will trust the client for now.
-
-def generate_case_id():
+def generate_tracking_id(prefix="FI"):
     chars = string.ascii_uppercase + string.digits
-    return "FI-" + ''.join(random.choice(chars) for _ in range(5))
+    return prefix + "-" + ''.join(random.choice(chars) for _ in range(5))
 
 @app.route('/')
 def index():
@@ -46,7 +44,7 @@ def submit_feedback():
     category = category_input
     urgency = urgency_input
 
-    case_id = generate_case_id()
+    case_id = generate_tracking_id("FI")
 
     # Insert into Supabase
     try:
@@ -64,17 +62,31 @@ def submit_feedback():
         print("Supabase Insert Error:", e)
         return jsonify({"error": "Failed to submit feedback"}), 500
 
-@app.route('/api/tracking/<case_id>', methods=['GET'])
-def track_case(case_id):
+@app.route('/api/tracking/<track_id>', methods=['GET'])
+def track_case(track_id):
     try:
-        response = supabase.table("feedback").select("status, category, urgency").eq("case_id", case_id).execute()
-        if len(response.data) > 0:
-            return jsonify(response.data[0]), 200
+        prefix = track_id.split('-')[0]
+        if prefix == 'FI':
+            table, id_col, type_label = "feedback", "case_id", "Feedback"
+        elif prefix == 'ID':
+            table, id_col, type_label = "ideas", "idea_id", "Idea Box"
+        elif prefix == 'LF':
+            table, id_col, type_label = "lost_found", "tracking_id", "Lost & Found"
+        elif prefix == 'SG':
+            table, id_col, type_label = "study_groups", "tracking_id", "Study Group"
         else:
-            return jsonify({"error": "Case not found"}), 404
+            return jsonify({"error": "Invalid ID format"}), 400
+
+        res = supabase.table(table).select("*").eq(id_col, track_id).execute()
+        if len(res.data) > 0:
+            item = res.data[0]
+            item['type_label'] = type_label
+            return jsonify(item), 200
+        else:
+            return jsonify({"error": "Submission not found"}), 404
     except Exception as e:
-        print("Supabase Select Error:", e)
-        return jsonify({"error": "Failed to fetch case"}), 500
+        print("Tracking Error:", e)
+        return jsonify({"error": "Failed to track submission"}), 500
 
 @app.route('/api/support', methods=['POST'])
 def pledge_support():
@@ -206,8 +218,7 @@ def submit_idea():
     impact = data.get('impact')
     grade = data.get('grade', '')
 
-    # Client-side filter guarantees it passed if we reached here
-    idea_id = "ID-" + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(5))
+    idea_id = generate_tracking_id("ID")
     try:
         supabase.table("ideas").insert({
             "idea_id": idea_id,
@@ -216,7 +227,7 @@ def submit_idea():
             "category": category,
             "impact": impact,
             "grade": grade,
-            "status": "Under Review",
+            "status": "Received",
             "is_spam": False
         }).execute()
         return jsonify({"idea_id": idea_id}), 200
@@ -241,15 +252,17 @@ def handle_lost_found():
             return jsonify([]), 200
     elif request.method == 'POST':
         data = request.json
+        track_id = generate_tracking_id("LF")
         try:
             supabase.table("lost_found").insert({
+                "tracking_id": track_id,
                 "type": data.get('type'),
                 "item_name": data.get('item_name'),
                 "description": data.get('description')[:100],
                 "location": data.get('location'),
                 "contact": data.get('contact', '')
             }).execute()
-            return jsonify({"success": True}), 200
+            return jsonify({"success": True, "tracking_id": track_id}), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
@@ -263,15 +276,17 @@ def handle_study_groups():
             return jsonify([]), 200
     elif request.method == 'POST':
         data = request.json
+        track_id = generate_tracking_id("SG")
         try:
             supabase.table("study_groups").insert({
+                "tracking_id": track_id,
                 "subject": data.get('subject'),
                 "topic": data.get('topic'),
                 "looking_for": data.get('looking_for'),
                 "grade": data.get('grade'),
                 "preferred_time": data.get('preferred_time')
             }).execute()
-            return jsonify({"success": True}), 200
+            return jsonify({"success": True, "tracking_id": track_id}), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
@@ -299,6 +314,140 @@ def admin_delete_lf(id):
         supabase.table("lost_found").delete().eq("id", id).execute()
         return jsonify({"success": True}), 200
     except Exception as e: return jsonify({"error": str(e)}), 500
+
+@app.route('/api/admin/submissions/<table_name>/<id>', methods=['PUT'])
+def admin_update_submission(table_name, id):
+    if not is_admin(): return jsonify({"error": "Unauthorized"}), 401
+    valid_tables = ["feedback", "ideas", "lost_found", "study_groups"]
+    if table_name not in valid_tables: return jsonify({"error": "Invalid table"}), 400
+    
+    data = request.json
+    update_data = {}
+    if 'status' in data: update_data['status'] = data['status']
+    if 'admin_response' in data: 
+        update_data['admin_response'] = data['admin_response']
+        update_data['response_timestamp'] = datetime.utcnow().isoformat()
+    if 'priority' in data: update_data['priority'] = data['priority']
+    
+    try:
+        if update_data:
+            supabase.table(table_name).update(update_data).eq("id", id).execute()
+        return jsonify({"success": True}), 200
+    except Exception as e: return jsonify({"error": str(e)}), 500
+
+@app.route('/api/polls', methods=['GET', 'POST'])
+def manage_polls():
+    if request.method == 'GET':
+        try:
+            polls_res = supabase.table("polls").select("*").order("created_at", desc=True).execute()
+            polls = polls_res.data
+            options_res = supabase.table("poll_options").select("*").execute()
+            options_by_poll = {}
+            for opt in options_res.data:
+                options_by_poll.setdefault(opt['poll_id'], []).append(opt)
+            for p in polls:
+                p['options'] = options_by_poll.get(p['id'], [])
+            return jsonify(polls), 200
+        except Exception as e: return jsonify({"error": str(e)}), 500
+    elif request.method == 'POST':
+        if not is_admin(): return jsonify({"error": "Unauthorized"}), 401
+        data = request.json
+        try:
+            poll_res = supabase.table("polls").insert({
+                "question": data.get("question"),
+                "type": data.get("type"),
+                "status": data.get("status", "Draft"),
+                "start_date": data.get("start_date") or datetime.utcnow().isoformat(),
+                "end_date": data.get("end_date")
+            }).execute()
+            poll_id = poll_res.data[0]['id']
+            if 'options' in data and data['options']:
+                opts = [{"poll_id": poll_id, "option_text": opt} for opt in data['options']]
+                supabase.table("poll_options").insert(opts).execute()
+            return jsonify({"success": True}), 200
+        except Exception as e: return jsonify({"error": str(e)}), 500
+
+@app.route('/api/polls/vote', methods=['POST'])
+def vote_poll():
+    data = request.json
+    poll_type = data.get('poll_type')
+    option_id = data.get('option_id')
+    ranked_options = data.get('ranked_options')
+    
+    try:
+        if poll_type in ['Yes-No', 'Opinion'] and option_id:
+            res = supabase.table("poll_options").select("votes").eq("id", option_id).execute()
+            if res.data:
+                new_votes = res.data[0]['votes'] + 1
+                supabase.table("poll_options").update({"votes": new_votes}).eq("id", option_id).execute()
+        elif poll_type == 'Priority' and ranked_options:
+            for rank_data in ranked_options:
+                oid = rank_data['id']
+                rank = rank_data['rank']
+                res = supabase.table("poll_options").select("average_rank, votes").eq("id", oid).execute()
+                if res.data:
+                    current_avg = res.data[0]['average_rank']
+                    votes = res.data[0]['votes']
+                    new_avg = ((current_avg * votes) + rank) / (votes + 1)
+                    supabase.table("poll_options").update({
+                        "average_rank": new_avg,
+                        "votes": votes + 1
+                    }).eq("id", oid).execute()
+        return jsonify({"success": True}), 200
+    except Exception as e: return jsonify({"error": str(e)}), 500
+
+@app.route('/api/tasks', methods=['GET', 'POST', 'PUT'])
+def manage_tasks():
+    if request.method == 'GET':
+        try:
+            tasks_res = supabase.table("tasks").select("*").order("created_at", desc=True).execute()
+            tasks = tasks_res.data
+            subtasks_res = supabase.table("subtasks").select("*").order("created_at", desc=False).execute()
+            subtasks_by_task = {}
+            for st in subtasks_res.data:
+                subtasks_by_task.setdefault(st['task_id'], []).append(st)
+            for t in tasks:
+                t['subtasks'] = subtasks_by_task.get(t['id'], [])
+            return jsonify(tasks), 200
+        except Exception as e: return jsonify({"error": str(e)}), 500
+    
+    if not is_admin(): return jsonify({"error": "Unauthorized"}), 401
+    
+    if request.method == 'POST':
+        data = request.json
+        try:
+            task_res = supabase.table("tasks").insert({
+                "title": data.get("title"),
+                "focus_area": data.get("focus_area"),
+                "description": data.get("description"),
+                "status": data.get("status", "Planned"),
+                "priority": data.get("priority", "Medium"),
+                "assignee": data.get("assignee"),
+                "impact_statement": data.get("impact_statement")
+            }).execute()
+            task_id = task_res.data[0]['id']
+            if 'subtasks' in data and data['subtasks']:
+                sts = [{"task_id": task_id, "title": st} for st in data['subtasks']]
+                supabase.table("subtasks").insert(sts).execute()
+            return jsonify({"success": True}), 200
+        except Exception as e: return jsonify({"error": str(e)}), 500
+        
+    elif request.method == 'PUT':
+        data = request.json
+        task_id = data.get('id')
+        update_data = {k: v for k, v in data.items() if k in ['status', 'priority', 'assignee', 'impact_statement']}
+        if update_data.get('status') == 'Completed':
+            update_data['completed_at'] = datetime.utcnow().isoformat()
+        try:
+            if update_data:
+                supabase.table("tasks").update(update_data).eq("id", task_id).execute()
+            
+            if 'subtasks' in data:
+                for st in data['subtasks']:
+                    if 'id' in st:
+                        supabase.table("subtasks").update({"is_completed": st.get("is_completed", False)}).eq("id", st['id']).execute()
+            return jsonify({"success": True}), 200
+        except Exception as e: return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

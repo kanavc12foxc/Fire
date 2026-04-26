@@ -10,6 +10,9 @@ CREATE TABLE IF NOT EXISTS public.feedback (
     grade TEXT,
     status TEXT DEFAULT 'Received',
     is_spam BOOLEAN DEFAULT false,
+    admin_response TEXT,
+    response_timestamp TIMESTAMP WITH TIME ZONE,
+    priority BOOLEAN DEFAULT false,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
@@ -69,6 +72,9 @@ CREATE TABLE IF NOT EXISTS public.ideas (
     grade TEXT,
     status TEXT DEFAULT 'Under Review',
     is_spam BOOLEAN DEFAULT false,
+    admin_response TEXT,
+    response_timestamp TIMESTAMP WITH TIME ZONE,
+    priority BOOLEAN DEFAULT false,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 ALTER TABLE public.ideas DISABLE ROW LEVEL SECURITY;
@@ -76,26 +82,36 @@ ALTER TABLE public.ideas DISABLE ROW LEVEL SECURITY;
 -- 6. Lost & Found Table
 CREATE TABLE IF NOT EXISTS public.lost_found (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    tracking_id TEXT UNIQUE NOT NULL,
     type TEXT NOT NULL,
     item_name TEXT NOT NULL,
     description TEXT NOT NULL,
     location TEXT NOT NULL,
     contact TEXT,
     date_posted TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    expires_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now() + interval '14 days') NOT NULL
+    expires_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now() + interval '14 days') NOT NULL,
+    status TEXT DEFAULT 'Posted',
+    admin_response TEXT,
+    response_timestamp TIMESTAMP WITH TIME ZONE,
+    priority BOOLEAN DEFAULT false
 );
 ALTER TABLE public.lost_found DISABLE ROW LEVEL SECURITY;
 
 -- 7. Study Groups Table
 CREATE TABLE IF NOT EXISTS public.study_groups (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    tracking_id TEXT UNIQUE NOT NULL,
     subject TEXT NOT NULL,
     topic TEXT NOT NULL,
     looking_for TEXT NOT NULL,
     grade TEXT NOT NULL,
     preferred_time TEXT NOT NULL,
     date_posted TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
-    expires_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now() + interval '7 days') NOT NULL
+    expires_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now() + interval '7 days') NOT NULL,
+    status TEXT DEFAULT 'Posted',
+    admin_response TEXT,
+    response_timestamp TIMESTAMP WITH TIME ZONE,
+    priority BOOLEAN DEFAULT false
 );
 ALTER TABLE public.study_groups DISABLE ROW LEVEL SECURITY;
 
@@ -117,3 +133,54 @@ CREATE TABLE IF NOT EXISTS public.whitelist (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 ALTER TABLE public.whitelist DISABLE ROW LEVEL SECURITY;
+
+-- 10. Polls Table
+CREATE TABLE IF NOT EXISTS public.polls (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    question TEXT NOT NULL,
+    type TEXT NOT NULL, -- Opinion, Priority, Yes-No
+    status TEXT DEFAULT 'Active', -- Draft, Active, Closed
+    start_date TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()),
+    end_date TIMESTAMP WITH TIME ZONE,
+    pinned BOOLEAN DEFAULT false,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+ALTER TABLE public.polls DISABLE ROW LEVEL SECURITY;
+
+-- 11. Poll Options Table
+CREATE TABLE IF NOT EXISTS public.poll_options (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    poll_id UUID REFERENCES public.polls(id) ON DELETE CASCADE,
+    option_text TEXT NOT NULL,
+    votes INTEGER DEFAULT 0,
+    average_rank FLOAT DEFAULT 0,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+ALTER TABLE public.poll_options DISABLE ROW LEVEL SECURITY;
+
+-- 12. Tasks Table
+CREATE TABLE IF NOT EXISTS public.tasks (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    title TEXT NOT NULL,
+    focus_area TEXT NOT NULL,
+    description TEXT,
+    status TEXT DEFAULT 'Planned', -- Planned, In Progress, Completed, Blocked
+    priority TEXT DEFAULT 'Medium', -- High, Medium, Low
+    assignee TEXT,
+    impact_statement TEXT,
+    start_date TIMESTAMP WITH TIME ZONE,
+    end_date TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+    completed_at TIMESTAMP WITH TIME ZONE
+);
+ALTER TABLE public.tasks DISABLE ROW LEVEL SECURITY;
+
+-- 13. Subtasks Table
+CREATE TABLE IF NOT EXISTS public.subtasks (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    task_id UUID REFERENCES public.tasks(id) ON DELETE CASCADE,
+    title TEXT NOT NULL,
+    is_completed BOOLEAN DEFAULT false,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+ALTER TABLE public.subtasks DISABLE ROW LEVEL SECURITY;

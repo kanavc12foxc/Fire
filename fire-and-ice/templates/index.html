@@ -20,16 +20,27 @@
             <li><a href="#about" class="nav-link" data-page="about">About</a></li>
             <li><a href="#manifesto" class="nav-link" data-page="manifesto">Manifesto</a></li>
             <li class="dropdown">
-                <a href="#" class="nav-link">Student Hub ▼</a>
+                <a href="#" class="nav-link">Engage ▼</a>
                 <div class="dropdown-content">
-                    <a href="#pulse" class="nav-link" data-page="pulse"><i data-lucide="bar-chart-2"></i> Pulse (Polls)</a>
+                    <a href="#polls" class="nav-link" data-page="polls"><i data-lucide="bar-chart-2"></i> Polls</a>
                     <a href="#idea-box" class="nav-link" data-page="idea-box"><i data-lucide="lightbulb"></i> Idea Box</a>
-                    <a href="#lost-found" class="nav-link" data-page="lost-found"><i data-lucide="search"></i> Lost & Found</a>
-                    <a href="#study-groups" class="nav-link" data-page="study-groups"><i data-lucide="users"></i> Study Groups</a>
+                    <a href="#feedback" class="nav-link" data-page="feedback"><i data-lucide="shield-alert"></i> Feedback</a>
                 </div>
             </li>
-            <li><a href="#action-board" class="nav-link" data-page="action-board">Action Board</a></li>
-            <li><a href="#feedback" class="btn btn-primary btn-nav-cta" onclick="navigate('feedback')">Speak Anonymously</a></li>
+            <li class="dropdown">
+                <a href="#" class="nav-link">Track ▼</a>
+                <div class="dropdown-content">
+                    <a href="#track" class="nav-link" data-page="track"><i data-lucide="search"></i> Universal Tracker</a>
+                    <a href="#action-board" class="nav-link" data-page="action-board"><i data-lucide="list"></i> Action Board</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link">Progress ▼</a>
+                <div class="dropdown-content">
+                    <a href="#progress" class="nav-link" data-page="progress"><i data-lucide="trello"></i> Task Board</a>
+                    <a href="#announcements" class="nav-link" data-page="announcements"><i data-lucide="bell"></i> Announcements</a>
+                </div>
+            </li>
         </ul>
     </nav>
 
@@ -137,16 +148,16 @@
             </form>
         </section>
 
-        <!-- Case Tracking Page -->
-        <section id="tracking" class="page">
-            <h2><i data-lucide="crosshair"></i> Track Your Case</h2>
+        <!-- Universal Tracking Page -->
+        <section id="track" class="page">
+            <h2><i data-lucide="crosshair"></i> Universal Tracker</h2>
             <div class="card form-container card-info">
                 <div class="form-group">
-                    <label>Enter Case ID</label>
-                    <input type="text" id="t-caseid" placeholder="e.g. FI-8K29Q">
+                    <label>Enter your ID</label>
+                    <input type="text" id="t-caseid" placeholder="e.g. FI-8K29Q, ID-XXXXX, LF-XXXXX, SG-XXXXX">
                 </div>
-                <button class="btn btn-secondary w-100" onclick="trackCase()">Track Status</button>
-                <div id="tracking-result" class="result-msg tracking-box"></div>
+                <button class="btn btn-secondary w-100" onclick="trackCase()">Track</button>
+                <div id="tracking-result" class="result-msg tracking-box" style="margin-top: 2rem;"></div>
             </div>
         </section>
 
@@ -169,32 +180,73 @@
             </div>
         </section>
 
-        <!-- Action Board Page -->
-        <section id="action-board" class="page">
-            <h2><i data-lucide="clipboard-list"></i> Public Action Board</h2>
-            <p style="margin-bottom: 2rem;">Anonymized view of issues we are actively working on.</p>
-            <div class="card">
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Concern Area</th>
-                            <th>Current Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="action-table-body">
-                        <tr><td colspan="2">Loading...</td></tr>
-                    </tbody>
-                </table>
+        <!-- Progress (Task Board) Page -->
+        <section id="progress" class="page">
+            <div class="progress-header">
+                <h2><i data-lucide="trello"></i> What We're Building</h2>
+                <p class="subtitle">Full transparency on every commitment we've made and every action we're taking.</p>
+                <p class="last-updated">Last updated: <span id="progress-last-updated">Just now</span></p>
+            </div>
+            
+            <div class="card card-info overall-progress">
+                <h3>Campaign Commitments — Overall Progress</h3>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill gradient-fire-ice" id="overall-progress-bar" style="width: 0%;"></div>
+                </div>
+                <div class="progress-stats">
+                    <span class="stat-pill completed" id="stat-completed">0 Completed</span>
+                    <span class="stat-pill in-progress" id="stat-in-progress">0 In Progress</span>
+                    <span class="stat-pill planned" id="stat-planned">0 Planned</span>
+                </div>
+            </div>
+
+            <div class="board-controls">
+                <button class="btn btn-secondary" id="toggle-timeline-btn" onclick="toggleTimeline()"><i data-lucide="calendar"></i> Switch to Timeline</button>
+            </div>
+
+            <div class="tabs progress-tabs" id="progress-tabs-container">
+                <button class="tab-btn active" onclick="switchProgressTab('Student Safety')"><i data-lucide="shield-check"></i> Student Safety</button>
+                <button class="tab-btn" onclick="switchProgressTab('Anti-Bullying')"><i data-lucide="shield-alert"></i> Anti-Bullying</button>
+                <button class="tab-btn" onclick="switchProgressTab('Communication')"><i data-lucide="message-square"></i> Communication</button>
+                <button class="tab-btn" onclick="switchProgressTab('Student Voice')"><i data-lucide="mic"></i> Student Voice</button>
+                <button class="tab-btn" onclick="switchProgressTab('System & Tech')"><i data-lucide="settings"></i> System & Tech</button>
+            </div>
+
+            <div id="progress-board-view">
+                <!-- Tab specific progress and task list loaded here -->
+            </div>
+            <div id="progress-timeline-view" style="display: none;">
+                <!-- Gantt chart view loaded here -->
+            </div>
+
+            <h3 style="margin-top: 4rem; margin-bottom: 1.5rem;"><i data-lucide="award"></i> Recently Completed</h3>
+            <div id="wins-wall" class="wins-grid">
+                <!-- Completed tasks loaded here -->
             </div>
         </section>
 
-        <!-- Pulse Page -->
-        <section id="pulse" class="page">
-            <h2><i data-lucide="bar-chart-2"></i> Pulse: Student Issues</h2>
-            <div class="card card-info" style="margin-bottom: 2rem; background: var(--ice-tint);">
-                <p><strong>Your votes shape the manifesto. Top 3 issues get priority attention.</strong></p>
+        <!-- Polls Page -->
+        <section id="polls" class="page">
+            <div class="polls-header text-center" style="margin-bottom: 3rem;">
+                <h2>Your Voice. Your School.</h2>
+                <p class="subtitle">Vote on what matters. Every vote shapes our priorities.</p>
             </div>
-            <div id="pulse-list">Loading issues...</div>
+
+            <h3 class="section-title"><i data-lucide="activity"></i> Active Polls</h3>
+            <div id="active-polls-list" class="polls-grid">
+                Loading active polls...
+            </div>
+
+            <h3 class="section-title" style="margin-top: 4rem;"><i data-lucide="clock"></i> Upcoming Polls</h3>
+            <div id="upcoming-polls-list" class="upcoming-grid">
+                <!-- Upcoming list -->
+            </div>
+
+            <h3 class="section-title" style="margin-top: 4rem;"><i data-lucide="archive"></i> Closed Polls</h3>
+            <p class="subtitle" style="margin-bottom: 1rem;">These results shaped our manifesto</p>
+            <div id="closed-polls-list" class="closed-accordion">
+                <!-- Closed list -->
+            </div>
         </section>
 
         <!-- Idea Box Page -->
@@ -294,16 +346,17 @@
                 <a href="#manifesto" onclick="navigate('manifesto')">Manifesto</a>
             </div>
             <div class="footer-col">
-                <h4>Student Hub</h4>
-                <a href="#pulse" onclick="navigate('pulse')">Pulse Poll</a>
+                <h4>Engage</h4>
+                <a href="#polls" onclick="navigate('polls')">Polls</a>
                 <a href="#idea-box" onclick="navigate('idea-box')">Idea Box</a>
-                <a href="#lost-found" onclick="navigate('lost-found')">Lost & Found</a>
-                <a href="#study-groups" onclick="navigate('study-groups')">Study Groups</a>
+                <a href="#feedback" onclick="navigate('feedback')">Speak Anonymously</a>
             </div>
             <div class="footer-col">
-                <h4>Safety & Contact</h4>
-                <a href="#feedback" onclick="navigate('feedback')">Speak Anonymously</a>
-                <a href="#tracking" onclick="navigate('tracking')">Track a Case</a>
+                <h4>Track & Progress</h4>
+                <a href="#track" onclick="navigate('track')">Universal Tracker</a>
+                <a href="#progress" onclick="navigate('progress')">Task Board</a>
+                <a href="#lost-found" onclick="navigate('lost-found')">Lost & Found</a>
+                <a href="#study-groups" onclick="navigate('study-groups')">Study Groups</a>
                 <a href="/admin">Admin Portal</a>
             </div>
         </div>
