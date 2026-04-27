@@ -1,125 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vote for Amogh - Fire & Ice</title>
-    <link rel="stylesheet" href="/static/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fire & Ice — Vote for Amogh</title>
+  <meta name="description" content="A student accountability platform built on transparency, anonymity, and action">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#F4622A">
+  <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fireandice.in/">
+  <meta property="og:title" content="Fire & Ice — Vote for Amogh">
+  <meta property="og:description" content="A student accountability platform built on transparency, anonymity, and action">
+  <meta property="og:image" content="https://fireandice.in/assets/og-image.png">
+  <meta property="og:site_name" content="Fire & Ice — Vote for Amogh">
+  <meta property="og:locale" content="en_IN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://fireandice.in/assets/og-image.png">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fireandice.in/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Fire & Ice — Vote for Amogh",
+    "url": "https://fireandice.in/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Fire & Ice",
+      "url": "https://fireandice.in"
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">
-            <i data-lucide="shield" class="text-fire" style="margin-right: 4px;"></i>
-            <span class="brand">Fire & Ice</span>
-        </div>
-        <button class="hamburger" onclick="toggleNav()"><i data-lucide="menu"></i></button>
-        <ul class="nav-links" id="nav-menu">
-            <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
-            <li><a href="#about" class="nav-link" data-page="about">About</a></li>
-            <li><a href="#manifesto" class="nav-link" data-page="manifesto">Manifesto</a></li>
-            <li class="dropdown">
-                <a href="#" class="nav-link">Engage ▼</a>
-                <div class="dropdown-content">
-                    <a href="#polls" class="nav-link" data-page="polls"><i data-lucide="bar-chart-2"></i> Polls</a>
-                    <a href="#idea-box" class="nav-link" data-page="idea-box"><i data-lucide="lightbulb"></i> Idea Box</a>
-                    <a href="#feedback" class="nav-link" data-page="feedback"><i data-lucide="shield-alert"></i> Feedback</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="nav-link">Track ▼</a>
-                <div class="dropdown-content">
-                    <a href="#track" class="nav-link" data-page="track"><i data-lucide="search"></i> Universal Tracker</a>
-                    <a href="#action-board" class="nav-link" data-page="action-board"><i data-lucide="list"></i> Action Board</a>
-                </div>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="nav-link">Progress ▼</a>
-                <div class="dropdown-content">
-                    <a href="#progress" class="nav-link" data-page="progress"><i data-lucide="trello"></i> Task Board</a>
-                    <a href="#announcements" class="nav-link" data-page="announcements"><i data-lucide="bell"></i> Announcements</a>
-                </div>
-            </li>
-        </ul>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="navbar" role="banner">
+    <nav aria-label="Main navigation">
+      <a href="/" class="logo" aria-label="Fire & Ice Home">
+        <span class="brand brand-fire">Fire</span>
+        <span class="brand brand-amp">&</span>
+        <span class="brand brand-ice">Ice</span>
+        <span class="brand-subtitle">STUDENT ACCOUNTABILITY PLATFORM</span>
+      </a>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" onclick="toggleNav()">
+        <i data-lucide="menu"></i>
+      </button>
+      <ul class="nav-links" id="nav-menu">
+        <li><a href="/" class="nav-link active" data-page="home" aria-current="page">Home</a></li>
+        <li><a href="/about" class="nav-link" data-page="about">About</a></li>
+        <li class="dropdown">
+          <a href="/" class="nav-link" data-page="home" aria-haspopup="true" aria-expanded="false">Engage ▾</a>
+          <div class="dropdown-content">
+            <a href="/feedback" class="nav-link" data-page="feedback">Anonymous Feedback</a>
+            <a href="/polls" class="nav-link" data-page="polls">Polls</a>
+            <a href="/idea-box" class="nav-link" data-page="idea-box">Idea Box</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/" class="nav-link" data-page="home" aria-haspopup="true" aria-expanded="false">Utilities ▾</a>
+          <div class="dropdown-content">
+            <a href="/lost-found" class="nav-link" data-page="lost-found">Lost & Found</a>
+            <a href="/study-groups" class="nav-link" data-page="study-groups">Study Groups</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/" class="nav-link" data-page="home" aria-haspopup="true" aria-expanded="false">Track ▾</a>
+          <div class="dropdown-content">
+            <a href="/track" class="nav-link" data-page="track">Track Your Case</a>
+            <a href="/action-board" class="nav-link" data-page="action-board">Action Board</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="/" class="nav-link" data-page="home" aria-haspopup="true" aria-expanded="false">Progress ▾</a>
+          <div class="dropdown-content">
+            <a href="/progress" class="nav-link" data-page="progress">Task Board</a>
+            <a href="/announcements" class="nav-link" data-page="announcements">Announcements</a>
+          </div>
+        </li>
+        <li><a href="/manifesto" class="nav-link" data-page="manifesto">Manifesto</a></li>
+      </ul>
+      <div class="nav-live" aria-label="System active">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span>SYSTEM ACTIVE</span>
+      </div>
     </nav>
+  </header>
 
-    <main id="app-content">
+    <main id="main-content">
         <!-- Home Page -->
-        <section id="home" class="page active">
+        <section id="home" class="page active" aria-labelledby="home-title">
             <div class="hero">
-                <h1>Vote for <span class="text-fire">Amogh</span>. Vote for <span class="text-ice">Fire & Ice</span>.</h1>
+                <h1 id="home-title">Vote for <span class="text-fire">Amogh</span>. Vote for <span class="text-ice">Fire & Ice</span>.</h1>
                 <p class="slogan">"<span class="slogan-fire">Fire to act.</span> <span class="slogan-ice">Ice to listen.</span>"</p>
                 <div class="hero-buttons">
                     <button class="btn btn-primary" onclick="navigate('feedback')">Speak Anonymously</button>
                     <button class="btn btn-secondary" onclick="navigate('support')">Support the Campaign</button>
                 </div>
             </div>
-            
-            <div class="quick-links">
+
+            <aside class="quick-links" aria-label="Quick access links">
                 <a href="#idea-box" onclick="navigate('idea-box')" class="quick-link-btn"><i data-lucide="lightbulb"></i> Idea Box</a>
                 <a href="#lost-found" onclick="navigate('lost-found')" class="quick-link-btn"><i data-lucide="search"></i> Lost & Found</a>
                 <a href="#study-groups" onclick="navigate('study-groups')" class="quick-link-btn"><i data-lucide="users"></i> Study Groups</a>
-            </div>
+            </aside>
 
-            <div class="features" style="margin-top: 3rem;">
-                <div class="card card-info">
-                    <h3><i data-lucide="trending-up" class="text-ice"></i> Pulse Snapshot</h3>
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-label);">Top priority issues voted by students</p>
+            <div class="features">
+                <article class="card card-info" aria-labelledby="pulse-snapshot-title">
+                    <h3 id="pulse-snapshot-title"><i data-lucide="trending-up" class="text-ice"></i> Pulse Snapshot</h3>
+                    <p>Top priority issues voted by students.</p>
                     <div id="home-pulse-snapshot">Loading...</div>
-                    <button class="btn btn-secondary w-100" style="margin-top: 1.5rem;" onclick="navigate('pulse')">Vote Now</button>
-                </div>
-                <div class="card card-urgent">
-                    <h3><i data-lucide="flame" class="text-fire"></i> Action Driven</h3>
+                    <button class="btn btn-secondary w-100" onclick="navigate('polls')">Vote Now</button>
+                </article>
+                <article class="card card-urgent" aria-labelledby="action-driven-title">
+                    <h3 id="action-driven-title"><i data-lucide="flame" class="text-fire"></i> Action Driven</h3>
                     <p>We believe in swift actions, accountability, and getting things done.</p>
-                </div>
-                <div class="card card-info">
-                    <h3><i data-lucide="snowflake" class="text-ice"></i> Compassionate</h3>
+                </article>
+                <article class="card card-info" aria-labelledby="compassionate-title">
+                    <h3 id="compassionate-title"><i data-lucide="snowflake" class="text-ice"></i> Compassionate</h3>
                     <p>We provide a safe, calm space to listen to your concerns without judgment.</p>
-                </div>
+                </article>
             </div>
         </section>
 
         <!-- About Page -->
-        <section id="about" class="page">
-            <h2><i data-lucide="user"></i> About Amogh</h2>
-            <div class="card">
+        <section id="about" class="page" aria-labelledby="about-title">
+            <h2 id="about-title"><i data-lucide="user"></i> About Amogh</h2>
+            <article class="card">
                 <p>Amogh is running to bring a balance of decisive action (<span class="text-fire">Fire</span>) and empathetic listening (<span class="text-ice">Ice</span>) to our school.</p>
                 <p>A leader who doesn't just promise but delivers while keeping your well-being in mind.</p>
-            </div>
+            </article>
         </section>
 
         <!-- Manifesto Page -->
-        <section id="manifesto" class="page">
-            <h2><i data-lucide="book-open"></i> Campaign Promises</h2>
+        <section id="manifesto" class="page" aria-labelledby="manifesto-title">
+            <h2 id="manifesto-title"><i data-lucide="book-open"></i> Campaign Promises</h2>
             <div class="manifesto-grid">
-                <div class="card">
+                <article class="card">
                     <h4><i data-lucide="shield-check" class="text-ice"></i> Student Safety</h4>
                     <p>A zero-tolerance policy towards harassment with safe spaces for all.</p>
-                </div>
-                <div class="card card-urgent">
+                </article>
+                <article class="card card-urgent">
                     <h4><i data-lucide="shield-alert" class="text-fire"></i> Anti-bullying System</h4>
                     <p>Proactive AI-assisted anonymous reporting to protect identities.</p>
-                </div>
-                <div class="card">
+                </article>
+                <article class="card">
                     <h4><i data-lucide="message-square" class="text-ice"></i> Better Communication</h4>
                     <p>Transparent action boards showing exactly what the council is working on.</p>
-                </div>
-                <div class="card">
+                </article>
+                <article class="card">
                     <h4><i data-lucide="mic" class="text-ice"></i> Student Voice</h4>
                     <p>Regular town halls and an open-door policy for everyone.</p>
-                </div>
+                </article>
             </div>
         </section>
 
         <!-- Anonymous Feedback Page -->
-        <section id="feedback" class="page">
-            <h2><i data-lucide="user-x"></i> Speak Anonymously</h2>
-            <p style="margin-bottom: 2rem;">Your identity is safe. Tell us what needs to change.</p>
-            
-            <form id="feedback-form" class="card form-container card-urgent">
+        <section id="feedback" class="page" aria-labelledby="feedback-title">
+            <h2 id="feedback-title"><i data-lucide="user-x"></i> Speak Anonymously</h2>
+            <p>Your identity is safe. Tell us what needs to change.</p>
+            <form id="feedback-form" class="card form-container card-urgent" aria-label="Anonymous feedback form">
                 <div class="form-group">
-                    <label>Category</label>
+                    <label for="f-category">Category</label>
                     <select id="f-category" required>
                         <option value="bullying">Bullying/Harassment</option>
                         <option value="academics">Academics</option>
@@ -128,11 +175,11 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Message</label>
+                    <label for="f-message">Message</label>
                     <textarea id="f-message" rows="5" required placeholder="Describe your concern..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Urgency Level</label>
+                    <label for="f-urgency">Urgency Level</label>
                     <select id="f-urgency">
                         <option value="Low">Low</option>
                         <option value="Medium">Medium</option>
@@ -140,7 +187,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Grade/Class (Optional)</label>
+                    <label for="f-grade">Grade/Class (Optional)</label>
                     <input type="text" id="f-grade" placeholder="e.g. 10th Grade">
                 </div>
                 <button type="submit" class="btn btn-primary w-100" id="submit-feedback-btn">Submit Feedback</button>
@@ -149,61 +196,56 @@
         </section>
 
         <!-- Universal Tracking Page -->
-        <section id="track" class="page">
-            <h2><i data-lucide="crosshair"></i> Universal Tracker</h2>
-            <div class="card form-container card-info">
+        <section id="track" class="page" aria-labelledby="track-title">
+            <h2 id="track-title"><i data-lucide="crosshair"></i> Universal Tracker</h2>
+            <article class="card form-container card-info" aria-label="Case tracking tool">
                 <div class="form-group">
-                    <label>Enter your ID</label>
+                    <label for="t-caseid">Enter your ID</label>
                     <input type="text" id="t-caseid" placeholder="e.g. FI-8K29Q, ID-XXXXX, LF-XXXXX, SG-XXXXX">
                 </div>
                 <button class="btn btn-secondary w-100" onclick="trackCase()">Track</button>
-                <div id="tracking-result" class="result-msg tracking-box" style="margin-top: 2rem;"></div>
-            </div>
+                <div id="tracking-result" class="result-msg tracking-box"></div>
+            </article>
         </section>
 
         <!-- Support Page -->
-        <section id="support" class="page">
-            <h2><i data-lucide="heart"></i> Pledge Your Support</h2>
-            <div class="card text-center">
-                <h1 id="support-counter" style="font-size: 4rem; color: var(--ice-color); justify-content: center;">--</h1>
-                <p style="margin-bottom: 2rem;">Students supporting Fire & Ice</p>
+        <section id="support" class="page" aria-labelledby="support-title">
+            <h2 id="support-title"><i data-lucide="heart"></i> Pledge Your Support</h2>
+            <article class="card text-center" aria-label="Support counter and pledge action">
+                <h1 id="support-counter">--</h1>
+                <p>Students supporting Fire & Ice</p>
                 <button class="btn btn-primary" onclick="pledgeSupport()" id="pledge-btn">Support Now</button>
                 <p id="support-msg" class="result-msg"></p>
-            </div>
+            </article>
         </section>
 
         <!-- Announcements Page -->
-        <section id="announcements" class="page">
-            <h2><i data-lucide="bell"></i> Latest Updates</h2>
-            <div id="announcements-list" class="feed-list" style="margin-top: 2rem;">
-                <p>Loading announcements...</p>
-            </div>
+        <section id="announcements" class="page" aria-labelledby="announcements-title">
+            <h2 id="announcements-title"><i data-lucide="bell"></i> Latest Updates</h2>
+            <div id="announcements-list" class="feed-list"></div>
         </section>
 
         <!-- Progress (Task Board) Page -->
-        <section id="progress" class="page">
-            <div class="progress-header">
-                <h2><i data-lucide="trello"></i> What We're Building</h2>
+        <section id="progress" class="page" aria-labelledby="progress-title">
+            <header class="progress-header">
+                <h2 id="progress-title"><i data-lucide="trello"></i> What We're Building</h2>
                 <p class="subtitle">Full transparency on every commitment we've made and every action we're taking.</p>
                 <p class="last-updated">Last updated: <span id="progress-last-updated">Just now</span></p>
-            </div>
-            
-            <div class="card card-info overall-progress">
-                <h3>Campaign Commitments — Overall Progress</h3>
+            </header>
+            <article class="card card-info overall-progress" aria-labelledby="overall-progress-title">
+                <h3 id="overall-progress-title">Campaign Commitments — Overall Progress</h3>
                 <div class="progress-bar-container">
-                    <div class="progress-bar-fill gradient-fire-ice" id="overall-progress-bar" style="width: 0%;"></div>
+                    <div class="progress-bar-fill gradient-fire-ice" id="overall-progress-bar"></div>
                 </div>
                 <div class="progress-stats">
                     <span class="stat-pill completed" id="stat-completed">0 Completed</span>
                     <span class="stat-pill in-progress" id="stat-in-progress">0 In Progress</span>
                     <span class="stat-pill planned" id="stat-planned">0 Planned</span>
                 </div>
-            </div>
-
+            </article>
             <div class="board-controls">
                 <button class="btn btn-secondary" id="toggle-timeline-btn" onclick="toggleTimeline()"><i data-lucide="calendar"></i> Switch to Timeline</button>
             </div>
-
             <div class="tabs progress-tabs" id="progress-tabs-container">
                 <button class="tab-btn active" onclick="switchProgressTab('Student Safety')"><i data-lucide="shield-check"></i> Student Safety</button>
                 <button class="tab-btn" onclick="switchProgressTab('Anti-Bullying')"><i data-lucide="shield-alert"></i> Anti-Bullying</button>
@@ -211,60 +253,42 @@
                 <button class="tab-btn" onclick="switchProgressTab('Student Voice')"><i data-lucide="mic"></i> Student Voice</button>
                 <button class="tab-btn" onclick="switchProgressTab('System & Tech')"><i data-lucide="settings"></i> System & Tech</button>
             </div>
-
-            <div id="progress-board-view">
-                <!-- Tab specific progress and task list loaded here -->
-            </div>
-            <div id="progress-timeline-view" style="display: none;">
-                <!-- Gantt chart view loaded here -->
-            </div>
-
-            <h3 style="margin-top: 4rem; margin-bottom: 1.5rem;"><i data-lucide="award"></i> Recently Completed</h3>
-            <div id="wins-wall" class="wins-grid">
-                <!-- Completed tasks loaded here -->
-            </div>
+            <div id="progress-board-view"></div>
+            <div id="progress-timeline-view" style="display: none;"></div>
+            <h3 class="section-title"><i data-lucide="award"></i> Recently Completed</h3>
+            <div id="wins-wall" class="wins-grid"></div>
         </section>
 
         <!-- Polls Page -->
-        <section id="polls" class="page">
-            <div class="polls-header text-center" style="margin-bottom: 3rem;">
-                <h2>Your Voice. Your School.</h2>
+        <section id="polls" class="page" aria-labelledby="polls-title">
+            <header class="polls-header text-center">
+                <h2 id="polls-title">Your Voice. Your School.</h2>
                 <p class="subtitle">Vote on what matters. Every vote shapes our priorities.</p>
-            </div>
-
+            </header>
             <h3 class="section-title"><i data-lucide="activity"></i> Active Polls</h3>
-            <div id="active-polls-list" class="polls-grid">
-                Loading active polls...
-            </div>
-
-            <h3 class="section-title" style="margin-top: 4rem;"><i data-lucide="clock"></i> Upcoming Polls</h3>
-            <div id="upcoming-polls-list" class="upcoming-grid">
-                <!-- Upcoming list -->
-            </div>
-
-            <h3 class="section-title" style="margin-top: 4rem;"><i data-lucide="archive"></i> Closed Polls</h3>
-            <p class="subtitle" style="margin-bottom: 1rem;">These results shaped our manifesto</p>
-            <div id="closed-polls-list" class="closed-accordion">
-                <!-- Closed list -->
-            </div>
+            <div id="active-polls-list" class="polls-grid"></div>
+            <h3 class="section-title"><i data-lucide="clock"></i> Upcoming Polls</h3>
+            <div id="upcoming-polls-list" class="upcoming-grid"></div>
+            <h3 class="section-title"><i data-lucide="archive"></i> Closed Polls</h3>
+            <p class="subtitle">These results shaped our manifesto</p>
+            <div id="closed-polls-list" class="closed-accordion"></div>
         </section>
 
         <!-- Idea Box Page -->
-        <section id="idea-box" class="page">
-            <h2><i data-lucide="lightbulb"></i> Idea Box</h2>
-            <p style="margin-bottom: 2rem;">Share constructive suggestions for our school. (Separate from complaints).</p>
-            
-            <form id="idea-form" class="card form-container">
+        <section id="idea-box" class="page" aria-labelledby="idea-box-title">
+            <h2 id="idea-box-title"><i data-lucide="lightbulb"></i> Idea Box</h2>
+            <p>Share constructive suggestions for our school. (Separate from complaints).</p>
+            <form id="idea-form" class="card form-container" aria-label="Submit a new idea">
                 <div class="form-group">
-                    <label>Title of Idea (Max 60 chars)</label>
+                    <label for="i-title">Title of Idea (Max 60 chars)</label>
                     <input type="text" id="i-title" maxlength="60" required>
                 </div>
                 <div class="form-group">
-                    <label>Description (Max 300 chars)</label>
+                    <label for="i-desc">Description (Max 300 chars)</label>
                     <textarea id="i-desc" rows="3" maxlength="300" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Category</label>
+                    <label for="i-category">Category</label>
                     <select id="i-category">
                         <option value="Academic">Academic</option>
                         <option value="Facilities">Facilities</option>
@@ -274,7 +298,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Impact Level</label>
+                    <label for="i-impact">Impact Level</label>
                     <select id="i-impact">
                         <option value="Small Win">Small Win</option>
                         <option value="Medium Change">Medium Change</option>
@@ -284,61 +308,86 @@
                 <button type="submit" class="btn btn-secondary w-100">Submit Idea</button>
                 <p id="idea-result" class="result-msg"></p>
             </form>
-
-            <h3 style="margin-top: 4rem; margin-bottom: 1.5rem;"><i data-lucide="star"></i> Featured Ideas</h3>
-            <div id="featured-ideas-list">Loading...</div>
+            <h3 class="section-title"><i data-lucide="star"></i> Featured Ideas</h3>
+            <div id="featured-ideas-list"></div>
         </section>
 
         <!-- Lost & Found Page -->
-        <section id="lost-found" class="page">
-            <h2><i data-lucide="search"></i> Lost & Found</h2>
-            <p style="margin-bottom: 2rem;">Auto-expires after 14 days.</p>
-            
-            <div class="card form-container card-info" style="margin-bottom: 2rem;">
-                <form id="lf-form">
+        <section id="lost-found" class="page" aria-labelledby="lost-found-title">
+            <h2 id="lost-found-title"><i data-lucide="search"></i> Lost & Found</h2>
+            <p>Auto-expires after 14 days.</p>
+            <div class="card form-container card-info">
+                <form id="lf-form" aria-label="Lost and found item submission">
                     <div class="form-group">
-                        <label>Type</label>
-                        <select id="lf-type"><option value="Lost">I Lost Something</option><option value="Found">I Found Something</option></select>
+                        <label for="lf-type">Type</label>
+                        <select id="lf-type">
+                            <option value="Lost">I Lost Something</option>
+                            <option value="Found">I Found Something</option>
+                        </select>
                     </div>
-                    <div class="form-group"><label>Item Name</label><input type="text" id="lf-item" required></div>
-                    <div class="form-group"><label>Location</label><input type="text" id="lf-loc" required></div>
-                    <div class="form-group"><label>Description (100 chars)</label><input type="text" id="lf-desc" maxlength="100" required></div>
-                    <div class="form-group"><label>Contact (Optional)</label><input type="text" id="lf-contact" placeholder="e.g. ask 9B"></div>
+                    <div class="form-group">
+                        <label for="lf-item">Item Name</label>
+                        <input type="text" id="lf-item" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lf-loc">Location</label>
+                        <input type="text" id="lf-loc" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lf-desc">Description (100 chars)</label>
+                        <input type="text" id="lf-desc" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lf-contact">Contact (Optional)</label>
+                        <input type="text" id="lf-contact" placeholder="e.g. ask 9B">
+                    </div>
                     <button type="submit" class="btn btn-primary w-100">Post Item</button>
                     <p id="lf-result" class="result-msg"></p>
                 </form>
             </div>
-
             <div class="tabs">
                 <button class="tab-btn active" onclick="switchLFTab('Lost')">Lost Items</button>
                 <button class="tab-btn" onclick="switchLFTab('Found')">Found Items</button>
             </div>
-            <div id="lf-list">Loading...</div>
+            <div id="lf-list"></div>
         </section>
 
         <!-- Study Groups Page -->
-        <section id="study-groups" class="page">
-            <h2 class="text-fire"><i data-lucide="users"></i> Learn Together. Rise Together.</h2>
-            <p style="margin-bottom: 2rem;">Find study partners or share notes. Posts expire after 7 days.</p>
-            
-            <div class="card form-container" style="margin-bottom: 2rem;">
-                <form id="sg-form">
-                    <div class="form-group"><label>Subject</label><input type="text" id="sg-subj" required></div>
-                    <div class="form-group"><label>Topic / Chapter</label><input type="text" id="sg-topic" required></div>
-                    <div class="form-group"><label>Looking For</label><input type="text" id="sg-look" placeholder="Study partner, notes..." required></div>
-                    <div class="form-group"><label>Grade / Class</label><input type="text" id="sg-grade" required></div>
-                    <div class="form-group"><label>Preferred Time</label><input type="text" id="sg-time" placeholder="Weekends, Afternoons..." required></div>
+        <section id="study-groups" class="page" aria-labelledby="study-groups-title">
+            <h2 id="study-groups-title" class="text-fire"><i data-lucide="users"></i> Learn Together. Rise Together.</h2>
+            <p>Find study partners or share notes. Posts expire after 7 days.</p>
+            <div class="card form-container">
+                <form id="sg-form" aria-label="Create a study group request">
+                    <div class="form-group">
+                        <label for="sg-subj">Subject</label>
+                        <input type="text" id="sg-subj" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sg-topic">Topic / Chapter</label>
+                        <input type="text" id="sg-topic" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sg-look">Looking For</label>
+                        <input type="text" id="sg-look" placeholder="Study partner, notes..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sg-grade">Grade / Class</label>
+                        <input type="text" id="sg-grade" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sg-time">Preferred Time</label>
+                        <input type="text" id="sg-time" placeholder="Weekends, Afternoons..." required>
+                    </div>
                     <button type="submit" class="btn btn-secondary w-100">Post Request</button>
                     <p id="sg-result" class="result-msg"></p>
                 </form>
             </div>
-
-            <div id="sg-list" class="pinboard">Loading...</div>
+            <div id="sg-list" class="pinboard"></div>
         </section>
     </main>
 
     <footer>
-        <div class="footer-content">
+        <nav class="footer-content" aria-label="Footer navigation">
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <a href="#home" onclick="navigate('home')">Home</a>
@@ -359,7 +408,7 @@
                 <a href="#study-groups" onclick="navigate('study-groups')">Study Groups</a>
                 <a href="/admin">Admin Portal</a>
             </div>
-        </div>
+        </nav>
         <div class="footer-bottom">
             <div style="display:flex; align-items:center; gap:8px;">
                 Built by the <span class="footer-brand">Fire & Ice</span> team <i data-lucide="flame" size="16" class="text-fire"></i><i data-lucide="snowflake" size="16" class="text-ice"></i>
