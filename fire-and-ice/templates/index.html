@@ -1,498 +1,426 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SCIS Student Voice Platform</title>
-  <meta name="description" content="A student accountability platform built on transparency, anonymity, and action">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#F4622A">
-  <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://fire-fgg8.onrender.com/">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://fire-fgg8.onrender.com/">
-  <meta property="og:title" content="SCIS Student Voice Platform">
-  <meta property="og:description" content="A student accountability platform built on transparency, anonymity, and action">
-  <meta property="og:image" content="https://fire-fgg8.onrender.com/assets/og-image.png">
-  <meta property="og:site_name" content="SCIS Student Voice Platform">
-  <meta property="og:locale" content="en_IN">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SCIS Student Voice Platform">
-  <meta name="twitter:description" content="A student accountability platform built on transparency, anonymity, and action">
-  <meta name="twitter:image" content="https://fire-fgg8.onrender.com/assets/og-image.png">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "SCIS Student Voice Platform",
-    "url": "https://fire-fgg8.onrender.com/",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "Student Voice Platform",
-      "url": "https://fire-fgg8.onrender.com"
-    }
-  }
-  </script>
-  <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCIS Student Portal</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="icon" href="https://www.scis.co.in/images/SCISLogo-green.png" type="image/png">
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  <header class="navbar" role="banner">
-    <nav aria-label="Main navigation">
-      <a href="/" class="logo" aria-label="Home">
-        <div style="display:flex; align-items:center; gap:12px;">
-            <div class="school-logo-placeholder" aria-label="School Logo">
-              <svg viewBox="0 0 48 48" height="48">
-                <circle cx="24" cy="24" r="22" fill="none" 
-                  stroke="var(--color-primary)" stroke-width="2"/>
-                <text x="24" y="28" text-anchor="middle" 
-                  font-size="10" fill="var(--color-primary)" 
-                  font-family="Merriweather">SCIS</text>
-              </svg>
-            </div>
-            <div style="display:flex; flex-direction:column;">
-                <span class="brand" style="color:var(--color-primary); font-size:1.2rem;">Student Voice</span>
-                <span class="brand-subtitle">STUDENT PLATFORM</span>
-            </div>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="https://www.scis.co.in/images/SCISLogo-green.png" alt="School Logo" style="height: 40px; width: auto;">
+            <span class="brand">SCIS Student Portal</span>
         </div>
-      </a>
-      <button class="hamburger nav-hamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-drawer" >
-        <i data-lucide="menu"></i>
-      </button>
-      <ul class="nav-links" id="nav-menu">
-        <li><a href="/" class="nav-link active" data-page="home" aria-current="page">Home</a></li>
-        <li><a href="/about" class="nav-link" data-page="about">About</a></li>
-        <li class="dropdown">
-          <button class="nav-link" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-engage" onclick="toggleDropdown(this)">Engage <span aria-hidden="true">▾</span></button>
-          <div class="dropdown-content" id="dropdown-engage">
-            <a href="/feedback" class="nav-link" data-page="feedback">Anonymous Feedback</a>
-            <a href="/polls" class="nav-link" data-page="polls">Polls</a>
-            <a href="/idea-box" class="nav-link" data-page="idea-box">Idea Box</a>
-          </div>
-        </li>
-        <li class="dropdown">
-          <button class="nav-link" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-utilities" onclick="toggleDropdown(this)">Utilities <span aria-hidden="true">▾</span></button>
-          <div class="dropdown-content" id="dropdown-utilities">
-            <a href="/lost-found" class="nav-link" data-page="lost-found">Lost & Found</a>
-            <a href="/study-groups" class="nav-link" data-page="study-groups">Study Groups</a>
-          </div>
-        </li>
-        <li class="dropdown">
-          <button class="nav-link" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-track" onclick="toggleDropdown(this)">Track <span aria-hidden="true">▾</span></button>
-          <div class="dropdown-content" id="dropdown-track">
-            <a href="/track" class="nav-link" data-page="track">Track Your Case</a>
-            <a href="/action-board" class="nav-link" data-page="action-board">Action Board</a>
-          </div>
-        </li>
-        <li class="dropdown">
-          <button class="nav-link" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="dropdown-progress" onclick="toggleDropdown(this)">Progress <span aria-hidden="true">▾</span></button>
-          <div class="dropdown-content" id="dropdown-progress">
-            <a href="/progress" class="nav-link" data-page="progress">Task Board</a>
-            <a href="/announcements" class="nav-link" data-page="announcements">Announcements</a>
-          </div>
-        </li>
-        <li><a href="/manifesto" class="nav-link" data-page="manifesto">Our Commitments to Students</a></li>
-      </ul>
-      <div class="nav-live" aria-label="System active">
-        <span class="pulse-dot" aria-hidden="true"></span>
-        <span>PLATFORM ACTIVE</span>
-      </div>
-
-      <!-- Mobile drawer -->
-      <div class="nav-drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true">
-        <div class="nav-drawer-header">
-          <span class="nav-drawer-logo">
-            <span style="color:var(--color-primary); font-family:Merriweather; font-weight:bold;">SCIS Student Voice</span>
-          </span>
-          <button class="nav-drawer-close" type="button" aria-label="Close navigation menu">
-            <i data-lucide="x"></i>
-          </button>
-        </div>
-        <ul class="nav-drawer-links" role="list">
-          <li><a href="/" class="nav-drawer-link">Home</a></li>
-          <li><a href="/about" class="nav-drawer-link">About</a></li>
-          <li><a href="/manifesto" class="nav-drawer-link">Our Commitments to Students</a></li>
-          <li class="nav-drawer-section-label" aria-hidden="true">Engage</li>
-          <li><a href="/feedback" class="nav-drawer-link">Anonymous Feedback</a></li>
-          <li><a href="/polls" class="nav-drawer-link">Polls</a></li>
-          <li><a href="/idea-box" class="nav-drawer-link">Idea Box</a></li>
-          <li class="nav-drawer-section-label" aria-hidden="true">Utilities</li>
-          <li><a href="/lost-found" class="nav-drawer-link">Lost &amp; Found</a></li>
-          <li><a href="/study-groups" class="nav-drawer-link">Study Groups</a></li>
-          <li class="nav-drawer-section-label" aria-hidden="true">Track</li>
-          <li><a href="/track" class="nav-drawer-link">Track Your Case</a></li>
-          <li><a href="/action-board" class="nav-drawer-link">Action Board</a></li>
-          <li class="nav-drawer-section-label" aria-hidden="true">Progress</li>
-          <li><a href="/progress" class="nav-drawer-link">Task Board</a></li>
-          <li><a href="/announcements" class="nav-drawer-link">Announcements</a></li>
+        <button class="hamburger" onclick="toggleNav()"><i data-lucide="menu"></i></button>
+        <ul class="nav-links" id="nav-menu">
+            <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+            <li><a href="#about" class="nav-link" data-page="about">About</a></li>
+            <li><a href="#manifesto" class="nav-link" data-page="manifesto">Manifesto</a></li>
+            <li class="dropdown">
+                <a href="#" class="nav-link">Engage <i data-lucide="chevron-down" size="14"></i></a>
+                <div class="dropdown-content">
+                    <a href="#polls" class="nav-link" data-page="polls"><i data-lucide="bar-chart-2"></i> Polls</a>
+                    <a href="#idea-box" class="nav-link" data-page="idea-box"><i data-lucide="lightbulb"></i> Idea Box</a>
+                    <a href="#feedback" class="nav-link" data-page="feedback"><i data-lucide="message-square"></i> Feedback</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link">Track <i data-lucide="chevron-down" size="14"></i></a>
+                <div class="dropdown-content">
+                    <a href="#track" class="nav-link" data-page="track"><i data-lucide="search"></i> Universal Tracker</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="nav-link">Progress <i data-lucide="chevron-down" size="14"></i></a>
+                <div class="dropdown-content">
+                    <a href="#progress" class="nav-link" data-page="progress"><i data-lucide="layout"></i> Task Board</a>
+                    <a href="#announcements" class="nav-link" data-page="announcements"><i data-lucide="bell"></i> Announcements</a>
+                </div>
+            </li>
+            <li><a href="/admin" class="btn-admin" style="margin-left: 1rem;">Admin Panel</a></li>
         </ul>
-        <p class="nav-drawer-quote"><em>"Every voice heard. Every concern addressed."</em></p>
-      </div>
-
-      <!-- Drawer overlay -->
-      <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
-
     </nav>
-  </header>
 
-    <main id="main-content">
+    <main id="app-content">
         <!-- Home Page -->
-        <section id="home" class="page active" aria-labelledby="home-title">
+        <section id="home" class="page active">
             <div class="hero">
-                <div class="hero-label">STUDENT PLATFORM · SCIS</div>
-                <h1 id="home-title" class="hero-headline">Where Every Student Voice Is Heard</h1>
-                <p class="hero-tagline">A secure, anonymous platform for student feedback, ideas, and school improvement — built by students, for students.</p>
+                <div style="margin-bottom: 2rem;">
+                    <img src="https://www.scis.co.in/images/SCISLogo-green.png" alt="SCIS Logo" style="height: 120px; width: auto;">
+                </div>
+                <h1 class="hero-title" style="margin-bottom: 0.5rem;">
+                    <span class="hero-line1">SCIS Student Portal</span>
+                </h1>
+                <p class="slogan" style="margin-top: 1rem; color: var(--text-body);">Your Voice. Your School.</p>
                 <div class="hero-buttons">
-                    <button class="btn btn-primary" onclick="navigate('feedback')">Speak Anonymously</button>
-                    <button class="btn btn-secondary" onclick="navigate('support')">Join the Movement</button>
+                    <button class="btn btn-primary" onclick="navigate('feedback')"><i data-lucide="message-circle"></i> Speak Anonymously</button>
+                </div>
+                
+                <div class="quick-links">
+                    <a href="#polls" onclick="navigate('polls')" class="quick-link-btn"><i data-lucide="bar-chart-2"></i> Polls</a>
+                    <a href="#idea-box" onclick="navigate('idea-box')" class="quick-link-btn"><i data-lucide="lightbulb"></i> Idea Box</a>
+                    <a href="#track" onclick="navigate('track')" class="quick-link-btn"><i data-lucide="search"></i> Universal Tracker</a>
+                    <a href="#progress" onclick="navigate('progress')" class="quick-link-btn"><i data-lucide="layout"></i> Task Board</a>
                 </div>
             </div>
 
-            <aside class="quick-links" aria-label="Quick access links">
-                <a href="#idea-box" onclick="navigate('idea-box')" class="quick-link-btn"><i data-lucide="lightbulb"></i> Idea Box</a>
-                <a href="#lost-found" onclick="navigate('lost-found')" class="quick-link-btn"><i data-lucide="search"></i> Lost & Found</a>
-                <a href="#study-groups" onclick="navigate('study-groups')" class="quick-link-btn"><i data-lucide="users"></i> Study Groups</a>
-            </aside>
-
             <div class="features">
-                <article class="card card-info" aria-labelledby="pulse-snapshot-title">
-                    <h3 id="pulse-snapshot-title"><i data-lucide="trending-up" class="text-ice"></i> Pulse Snapshot</h3>
-                    <p>Top priority issues voted by students.</p>
-                    <div id="home-pulse-snapshot">Loading...</div>
-                    <button class="btn btn-secondary w-100" onclick="navigate('polls')">Vote Now</button>
-                </article>
-                <article class="card card-urgent" aria-labelledby="action-driven-title">
-                    <h3 id="action-driven-title"><i data-lucide="flame" class="text-fire"></i> Action Driven</h3>
-                    <p>We believe in swift actions, accountability, and getting things done.</p>
-                </article>
-                <article class="card card-info" aria-labelledby="compassionate-title">
-                    <h3 id="compassionate-title"><i data-lucide="snowflake" class="text-ice"></i> Compassionate</h3>
-                    <p>We provide a safe, calm space to listen to your concerns without judgment.</p>
-                </article>
+                <div class="card card-urgent" style="text-align: left;">
+                    <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(239, 68, 68, 0.1); border-radius: 12px; margin-bottom: 1.5rem;">
+                        <i data-lucide="shield" class="text-fire" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1.25rem;">The Truth, Anonymously</h3>
+                    <p style="color: var(--text-body); line-height: 1.6;">We all know what's really going wrong behind the scenes, but no one wants a target on their back. Now, you hold the power. Submit anonymous, unfiltered feedback. We will read it, and we will act on it. No consequences. Just results.</p>
+                </div>
+                
+                <div class="card card-info" style="text-align: left;">
+                    <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(56, 189, 248, 0.1); border-radius: 12px; margin-bottom: 1.5rem;">
+                        <i data-lucide="eye" class="text-ice" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1.25rem;">Accountability</h3>
+                    <p style="color: var(--text-body); line-height: 1.6;">Every year, councils stand up and tell you exactly what you want to hear. Then they disappear. Not this time. With our Universal Tracker, you will watch every move we make. If we fail, you'll see it. Hold the Council accountable.</p>
+                </div>
+                
+                <div class="card" style="text-align: left; border: 1px solid #e2e8f0;">
+                    <div style="display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: #f1f5f9; border-radius: 12px; margin-bottom: 1.5rem;">
+                        <i data-lucide="lightbulb" style="color: #64748b; width: 24px; height: 24px;"></i>
+                    </div>
+                    <h3 style="margin-bottom: 0.75rem; font-size: 1.25rem;">Demand What's Yours</h3>
+                    <p style="color: var(--text-body); line-height: 1.6;">You are the ones walking these halls every day. You know what needs to change better than anyone. Don't just complain—give us your solutions in the Idea Box. If your idea is strong, it becomes our official policy.</p>
+                </div>
             </div>
         </section>
 
+
         <!-- About Page -->
-        <section id="about" class="page" aria-labelledby="about-title">
-            <h2 id="about-title"><i data-lucide="user"></i> About the Student Council</h2>
-            <article class="card">
-                <p>The Student Council is dedicated to ensuring every student's voice is heard, creating an environment built on trust, transparency, and actionable feedback.</p>
-                <p>A collective council that doesn't just promise but delivers while keeping your well-being in mind.</p>
-            </article>
+        <section id="about" class="page">
+            <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                <img src="https://www.scis.co.in/images/SCISLogo-green.png" alt="SCIS Logo" style="height: 100px; width: auto;">
+                <div>
+                    <h2 style="margin-bottom: 0.5rem; border-bottom: none;"><i data-lucide="users"></i> About the Student Council</h2>
+                    <p style="color: var(--text-label); font-weight: 500;">Your Representatives at Work</p>
+                </div>
+            </div>
+            <div class="card">
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">The <strong>SCIS Student Council</strong> is committed to transparent governance, student welfare, and school improvement. Every feature on this portal is designed to amplify your voice.</p>
+                <p style="margin-bottom: 1.5rem;">We believe in proactive leadership—listening to your deepest frustrations with absolute empathy and bringing the relentless drive necessary to force real change.</p>
+                <p>We are dedicated to holding the system accountable so that all students can thrive in a fair, safe environment. You want better events, stronger academics, and a better school life? We are here to make that happen.</p>
+            </div>
         </section>
 
-        <!-- Our Commitments to Students Page -->
-        <section id="manifesto" class="page" aria-labelledby="manifesto-title">
-            <h2 id="manifesto-title"><i data-lucide="book-open"></i> Platform Promises</h2>
+        <!-- Manifesto Page -->
+        <section id="manifesto" class="page">
+            <h2><i data-lucide="scroll-text"></i> Our Guiding Principles</h2>
             <div class="manifesto-grid">
-                <article class="card">
-                    <h4><i data-lucide="shield-check" class="text-ice"></i> Student Safety</h4>
-                    <p>A zero-tolerance policy towards harassment with safe spaces for all.</p>
-                </article>
-                <article class="card card-urgent">
-                    <h4><i data-lucide="shield-alert" class="text-fire"></i> Anti-bullying System</h4>
-                    <p>Proactive AI-assisted anonymous reporting to protect identities.</p>
-                </article>
-                <article class="card">
-                    <h4><i data-lucide="message-square" class="text-ice"></i> Better Communication</h4>
-                    <p>Transparent action boards showing exactly what the council is working on.</p>
-                </article>
-                <article class="card">
-                    <h4><i data-lucide="mic" class="text-ice"></i> Student Voice</h4>
-                    <p>Regular town halls and an open-door policy for everyone.</p>
-                </article>
+                <div class="card card-info">
+                    <h4><i data-lucide="heart-handshake" class="text-ice"></i> Inclusive Leadership</h4>
+                    <p>Every student matters. We will be a Council that listens without judgment, welcoming all voices regardless of grade, background, or status. Our doors are open to everyone—always.</p>
+                </div>
+                <div class="card card-info">
+                    <h4><i data-lucide="smile" class="text-ice"></i> Approachable & Present</h4>
+                    <p>You won't find us hidden behind closed doors. We will be visible, accessible, and ready to listen. Whether in the hallway or at events, we are representatives who actually care about your day-to-day life.</p>
+                </div>
+                <div class="card card-info">
+                    <h4><i data-lucide="users" class="text-ice"></i> Unity Without Bias</h4>
+                    <p>Division weakens us; unity defines us. We will bring every student together through real events, transparent decisions, and a student council that actually represents YOU. Under our leadership, no one will feel forgotten—because we advocate for ALL, not just the privileged few.</p>
+                </div>
+                <div class="card card-urgent">
+                    <h4><i data-lucide="shield-alert" class="text-fire"></i> Anonymous AI Justice</h4>
+                    <p>Bullies rely on your silence. We are stripping away their power. Our AI-assisted reporting system guarantees that if someone crosses the line, they will be dealt with swiftly, without anyone ever knowing it was you who spoke up.</p>
+                </div>
+                <div class="card card-urgent">
+                    <h4><i data-lucide="trophy" class="text-fire"></i> Unrivaled Academic Excellence</h4>
+                    <p>Excellence is not a goal—it is our expectation. We will champion academic resources like no Council before us, securing better tutoring, smarter study materials, and opportunities that set our students up to dominate in every exam. Your success is our legacy.</p>
+                </div>
+                <div class="card card-urgent">
+                    <h4><i data-lucide="gavel" class="text-fire"></i> Strict Discipline & Order</h4>
+                    <p>Rules exist for a reason. We support clear, fair standards across all students—no exceptions, no favorites. Every student deserves a safe, orderly environment, and we will advocate for discipline to be applied consistently and justly.</p>
+                </div>
             </div>
         </section>
 
         <!-- Anonymous Feedback Page -->
-        <section id="feedback" class="page" aria-labelledby="feedback-title">
-            <h2 id="feedback-title"><i data-lucide="user-x"></i> Speak Anonymously</h2>
-            <p>Your identity is safe. Tell us what needs to change.</p>
-            <form id="feedback-form" class="card form-container card-urgent" aria-label="Anonymous feedback form" novalidate>
+        <section id="feedback" class="page">
+            <h2><i data-lucide="message-square"></i> Speak Anonymously</h2>
+            <p style="margin-bottom: 2.5rem; color: var(--text-label);">Your identity is 100% protected. Tell us what needs to change in our school.</p>
+            
+            <form id="feedback-form" class="card form-container card-urgent">
                 <div class="form-group">
-                    <label for="f-category">Category</label>
-                    <select id="f-category" required aria-required="true" aria-describedby="f-category-error">
-                        <option value="" disabled selected>Select a category</option>
+                    <label>Category</label>
+                    <select id="f-category" required>
                         <option value="bullying">Bullying/Harassment</option>
                         <option value="academics">Academics</option>
                         <option value="facilities">Facilities</option>
                         <option value="suggestion">General Suggestion</option>
                     </select>
-                    <span class="form-error" id="f-category-error" role="alert" aria-live="polite" hidden></span>
                 </div>
                 <div class="form-group">
-                    <label for="f-message">Message</label>
-                    <textarea class="form-textarea" id="f-message" rows="5" required aria-required="true" placeholder="Describe your concern..." autocomplete="off" aria-describedby="f-message-error"></textarea>
-                    <span class="form-error" id="f-message-error" role="alert" aria-live="polite" hidden></span>
+                    <label>Message</label>
+                    <textarea id="f-message" rows="5" required placeholder="Describe your concern in detail..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="f-urgency">Urgency Level</label>
-                    <select id="f-urgency" aria-describedby="f-urgency-error">
-                        <option value="Low">Low</option>
-                        <option value="Medium">Medium</option>
-                        <option value="High">High</option>
+                    <label>Urgency Level</label>
+                    <select id="f-urgency">
+                        <option value="Low">Low - For information</option>
+                        <option value="Medium">Medium - Needs attention</option>
+                        <option value="High">High - Immediate action required</option>
                     </select>
-                    <span class="form-error" id="f-urgency-error" role="alert" aria-live="polite" hidden></span>
                 </div>
                 <div class="form-group">
-                    <label for="f-grade">Grade/Class (Optional)</label>
-                    <input class="form-input" type="text" id="f-grade" placeholder="e.g. 10th Grade" aria-describedby="f-grade-error">
-                    <span class="form-error" id="f-grade-error" role="alert" aria-live="polite" hidden></span>
+                    <label>Grade/Class (Optional)</label>
+                    <input type="text" id="f-grade" placeholder="e.g. 10th Grade">
                 </div>
-                <button type="submit" class="btn btn-primary w-100" id="submit-feedback-btn">Submit Feedback</button>
-                <p id="feedback-result" class="result-msg" role="alert" aria-live="polite"></p>
+                <button type="submit" class="btn btn-primary w-100" id="submit-feedback-btn"><i data-lucide="send"></i> Submit Securely</button>
+                <p id="feedback-result" class="result-msg"></p>
             </form>
         </section>
 
         <!-- Universal Tracking Page -->
-        <section id="track" class="page" aria-labelledby="track-title">
-            <h2 id="track-title"><i data-lucide="crosshair"></i> Universal Tracker</h2>
-            <article class="card form-container card-info" aria-label="Case tracking tool">
+        <section id="track" class="page">
+            <h2><i data-lucide="crosshair"></i> Universal Tracker</h2>
+            <div class="card form-container card-info">
                 <div class="form-group">
-                    <label for="t-caseid">Enter your ID</label>
-                    <input class="form-input" type="text" id="t-caseid" placeholder="e.g. FI-8K29Q, ID-XXXXX, LF-XXXXX, SG-XXXXX" aria-describedby="t-caseid-hint t-caseid-error">
-                    <span class="form-hint" id="t-caseid-hint">Enter the case ID you received when submitting</span>
-                    <span class="form-error" id="t-caseid-error" role="alert" aria-live="polite" hidden></span>
+                    <label>Enter your ID</label>
+                    <input type="text" id="t-caseid" placeholder="e.g. FI-8K29Q, ID-XXXXX, LF-XXXXX, SG-XXXXX">
                 </div>
-                <button class="btn btn-secondary w-100" type="button" onclick="trackCase()">Track</button>
-                <div id="tracking-result" class="result-msg tracking-box" role="alert" aria-live="polite"></div>
-            </article>
+                <button class="btn btn-secondary w-100" onclick="trackCase()">Track</button>
+                <div id="tracking-result" class="result-msg tracking-box" style="margin-top: 2rem;"></div>
+            </div>
         </section>
 
         <!-- Support Page -->
-        <section id="support" class="page" aria-labelledby="support-title">
-            <h2 id="support-title"><i data-lucide="heart"></i> Join the Movement</h2>
-            <article class="card text-center" aria-label="Support counter and pledge action">
-                <h1 id="support-counter">--</h1>
-                <p>Students who have joined the movement</p>
-                <button class="btn btn-primary" type="button" onclick="pledgeSupport()" id="pledge-btn">Join Now</button>
-                <p id="support-msg" class="result-msg" role="alert" aria-live="polite"></p>
-            </article>
+        <section id="support" class="page">
+            <div class="text-center">
+                <h2><i data-lucide="heart" class="text-fire"></i> Show Your Support</h2>
+                <p style="margin-bottom: 3rem; color: var(--text-label);">Together, we can make a difference in our school.</p>
+            </div>
+            <div class="card text-center" style="padding: 4rem 2rem;">
+                <h1 id="support-counter" class="gradient-text" style="font-size: 6rem; justify-content: center; margin-bottom: 1rem;">--</h1>
+                <p style="font-size: 1.25rem; font-weight: 600; margin-bottom: 2.5rem; color: var(--text-label);">Students supporting the Council</p>
+                <button class="btn btn-primary" onclick="pledgeSupport()" id="pledge-btn" style="padding: 1.5rem 4rem; font-size: 1.2rem;"><i data-lucide="thumbs-up"></i> Pledge Your Support</button>
+                <p id="support-msg" class="result-msg" style="margin-top: 2rem;"></p>
+            </div>
         </section>
 
         <!-- Announcements Page -->
-        <section id="announcements" class="page" aria-labelledby="announcements-title">
-            <h2 id="announcements-title"><i data-lucide="bell"></i> Latest Updates</h2>
-            <div id="announcements-list" class="feed-list"></div>
+        <section id="announcements" class="page">
+            <h2><i data-lucide="bell"></i> Latest Updates</h2>
+            <div id="announcements-list" class="feed-list" style="margin-top: 2rem;">
+                <p>Loading announcements...</p>
+            </div>
         </section>
 
         <!-- Progress (Task Board) Page -->
-        <section id="progress" class="page" aria-labelledby="progress-title">
-            <header class="progress-header">
-                <h2 id="progress-title"><i data-lucide="trello"></i> What We're Building</h2>
+        <section id="progress" class="page">
+            <div class="progress-header">
+                <h2><i data-lucide="layout"></i> What We're Building</h2>
                 <p class="subtitle">Full transparency on every commitment we've made and every action we're taking.</p>
                 <p class="last-updated">Last updated: <span id="progress-last-updated">Just now</span></p>
-            </header>
-            <article class="card card-info overall-progress" aria-labelledby="overall-progress-title">
-                <h3 id="overall-progress-title">Platform Commitments — Overall Progress</h3>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-completed">0</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-in-progress">0</span>
+                    <span class="stat-label">In Progress</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-planned">0</span>
+                    <span class="stat-label">Planned</span>
+                </div>
+            </div>
+
+            <div class="card overall-progress" style="margin-bottom: 3rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                    <h3 style="margin:0;">Council Initiatives — Overall Progress</h3>
+                </div>
                 <div class="progress-bar-container">
-                    <div class="progress-bar-fill gradient-fire-ice" id="overall-progress-bar"></div>
+                    <div class="progress-bar-fill" id="overall-progress-bar" style="width: 0%;"></div>
                 </div>
-                <div class="progress-stats">
-                    <span class="stat-pill completed" id="stat-completed">0 Completed</span>
-                    <span class="stat-pill in-progress" id="stat-in-progress">0 In Progress</span>
-                    <span class="stat-pill planned" id="stat-planned">0 Planned</span>
-                </div>
-            </article>
-            <div class="board-controls">
-                <button class="btn btn-secondary" type="button" id="toggle-timeline-btn" onclick="toggleTimeline()"><i data-lucide="calendar"></i> Switch to Timeline</button>
             </div>
+
+
             <div class="tabs progress-tabs" id="progress-tabs-container">
-                <button class="tab-btn active" type="button" onclick="switchProgressTab('Student Safety')"><i data-lucide="shield-check"></i> Student Safety</button>
-                <button class="tab-btn" type="button" onclick="switchProgressTab('Anti-Bullying')"><i data-lucide="shield-alert"></i> Anti-Bullying</button>
-                <button class="tab-btn" type="button" onclick="switchProgressTab('Communication')"><i data-lucide="message-square"></i> Communication</button>
-                <button class="tab-btn" type="button" onclick="switchProgressTab('Student Voice')"><i data-lucide="mic"></i> Student Voice</button>
-                <button class="tab-btn" type="button" onclick="switchProgressTab('System & Tech')"><i data-lucide="settings"></i> System & Tech</button>
+                <button class="tab-btn active" onclick="switchProgressTab('Student Safety')"><i data-lucide="shield-check"></i> Student Safety</button>
+                <button class="tab-btn" onclick="switchProgressTab('Anti-Bullying')"><i data-lucide="shield-alert"></i> Anti-Bullying</button>
+                <button class="tab-btn" onclick="switchProgressTab('Communication')"><i data-lucide="message-square"></i> Communication</button>
+                <button class="tab-btn" onclick="switchProgressTab('Student Voice')"><i data-lucide="mic"></i> Student Voice</button>
+                <button class="tab-btn" onclick="switchProgressTab('System & Tech')"><i data-lucide="settings"></i> System & Tech</button>
             </div>
-            <div id="progress-board-view"></div>
-            <div id="progress-timeline-view" style="display: none;"></div>
-            <h3 class="section-title"><i data-lucide="award"></i> Recently Completed</h3>
-            <div id="wins-wall" class="wins-grid"></div>
+
+            <div id="progress-board-view">
+                <!-- Tab specific progress and task list loaded here -->
+            </div>
+            <h3 style="margin-top: 4rem; margin-bottom: 1.5rem;"><i data-lucide="award"></i> Recently Completed</h3>
+            <div id="wins-wall" class="wins-grid">
+                <!-- Completed tasks loaded here -->
+            </div>
         </section>
 
         <!-- Polls Page -->
-        <section id="polls" class="page" aria-labelledby="polls-title">
-            <header class="polls-header text-center">
-                <h2 id="polls-title">Your Voice. Your School.</h2>
+        <section id="polls" class="page">
+            <div class="polls-header text-center" style="margin-bottom: 3rem;">
+                <h2>Your Voice. Your School.</h2>
                 <p class="subtitle">Vote on what matters. Every vote shapes our priorities.</p>
-            </header>
+            </div>
+
             <h3 class="section-title"><i data-lucide="activity"></i> Active Polls</h3>
-            <div id="active-polls-list" class="polls-grid"></div>
-            <h3 class="section-title"><i data-lucide="clock"></i> Upcoming Polls</h3>
-            <div id="upcoming-polls-list" class="upcoming-grid"></div>
-            <h3 class="section-title"><i data-lucide="archive"></i> Closed Polls</h3>
-            <p class="subtitle">These results shaped our manifesto</p>
-            <div id="closed-polls-list" class="closed-accordion"></div>
+            <div id="active-polls-list" class="polls-grid">
+                Loading active polls...
+            </div>
+
+            <h3 class="section-title" style="margin-top: 4rem;"><i data-lucide="clock"></i> Upcoming Polls</h3>
+            <div id="upcoming-polls-list" class="upcoming-grid">
+                <!-- Upcoming list -->
+            </div>
+
+            <h3 class="section-title" style="margin-top: 4rem;"><i data-lucide="archive"></i> Closed Polls</h3>
+            <p class="subtitle" style="margin-bottom: 1rem;">These results shaped our manifesto</p>
+            <div id="closed-polls-list" class="closed-accordion">
+                <!-- Closed list -->
+            </div>
         </section>
 
         <!-- Idea Box Page -->
-        <section id="idea-box" class="page" aria-labelledby="idea-box-title">
-            <h2 id="idea-box-title"><i data-lucide="lightbulb"></i> Idea Box</h2>
-            <p>Share constructive suggestions for our school. (Separate from complaints).</p>
-            <form id="idea-form" class="card form-container" aria-label="Submit a new idea" novalidate>
+        <section id="idea-box" class="page">
+            <h2><i data-lucide="lightbulb" class="text-ice"></i> The Idea Box</h2>
+            <p style="margin-bottom: 2.5rem; color: var(--text-label);">Share your vision for our school. Creative, constructive, and forward-thinking ideas only.</p>
+            
+            <form id="idea-form" class="card form-container">
                 <div class="form-group">
-                    <label for="i-title">Title of Idea (Max 60 chars)</label>
-                    <input class="form-input" type="text" id="i-title" maxlength="60" required aria-required="true" aria-describedby="i-title-error">
-                    <span class="form-error" id="i-title-error" role="alert" aria-live="polite" hidden></span>
+                    <label>Title of Idea</label>
+                    <input type="text" id="i-title" maxlength="60" required placeholder="Give your idea a catchy name">
                 </div>
                 <div class="form-group">
-                    <label for="i-desc">Description (Max 300 chars)</label>
-                    <textarea class="form-textarea" id="i-desc" rows="3" maxlength="300" required aria-required="true" aria-describedby="i-desc-error"></textarea>
-                    <span class="form-error" id="i-desc-error" role="alert" aria-live="polite" hidden></span>
+                    <label>The Big Vision</label>
+                    <textarea id="i-desc" rows="4" maxlength="300" required placeholder="Describe how this change will benefit everyone..."></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="i-category">Category</label>
-                    <select id="i-category">
-                        <option value="" disabled selected>Select a category</option>
-                        <option value="Academic">Academic</option>
-                        <option value="Facilities">Facilities</option>
-                        <option value="Events">Events</option>
-                        <option value="Wellbeing">Wellbeing</option>
-                        <option value="Other">Other</option>
-                    </select>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="i-category">
+                            <option value="Academic">Academic</option>
+                            <option value="Facilities">Facilities</option>
+                            <option value="Events">Events</option>
+                            <option value="Wellbeing">Wellbeing</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Impact Level</label>
+                        <select id="i-impact">
+                            <option value="Small Win">Small Win</option>
+                            <option value="Medium Change">Medium Change</option>
+                            <option value="Big Vision">Big Vision</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="i-impact">Impact Level</label>
-                    <select id="i-impact">
-                        <option value="" disabled selected>Select impact level</option>
-                        <option value="Small Win">Small Win</option>
-                        <option value="Medium Change">Medium Change</option>
-                        <option value="Big Vision">Big Vision</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-secondary w-100">Submit Idea</button>
-                <p id="idea-result" class="result-msg" role="alert" aria-live="polite"></p>
+                <button type="submit" class="btn btn-secondary w-100" style="margin-top: 1rem;"><i data-lucide="rocket"></i> Launch Idea</button>
+                <p id="idea-result" class="result-msg"></p>
             </form>
-            <h3 class="section-title"><i data-lucide="star"></i> Featured Ideas</h3>
-            <div id="featured-ideas-list"></div>
         </section>
 
         <!-- Lost & Found Page -->
-        <section id="lost-found" class="page" aria-labelledby="lost-found-title">
-            <h2 id="lost-found-title"><i data-lucide="search"></i> Lost & Found</h2>
-            <p>Auto-expires after 14 days.</p>
-            <div class="card form-container card-info">
-                <form id="lf-form" aria-label="Lost and found item submission" novalidate>
+        <section id="lost-found" class="page">
+            <h2><i data-lucide="search"></i> Lost & Found Hub</h2>
+            <p style="margin-bottom: 2.5rem; color: var(--text-label);">A community-driven board to reconnect you with your items.</p>
+            
+            <div class="card form-container card-info" style="margin-bottom: 4rem;">
+                <form id="lf-form">
                     <div class="form-group">
-                        <label for="lf-type">Type</label>
+                        <label>Post Type</label>
                         <select id="lf-type">
                             <option value="Lost">I Lost Something</option>
                             <option value="Found">I Found Something</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="lf-item">Item Name</label>
-                        <input class="form-input" type="text" id="lf-item" required aria-required="true" aria-describedby="lf-item-error">
-                        <span class="form-error" id="lf-item-error" role="alert" aria-live="polite" hidden></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="lf-loc">Location</label>
-                        <input class="form-input" type="text" id="lf-loc" required aria-required="true" aria-describedby="lf-loc-error">
-                        <span class="form-error" id="lf-loc-error" role="alert" aria-live="polite" hidden></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="lf-desc">Description (100 chars)</label>
-                        <input class="form-input" type="text" id="lf-desc" maxlength="100" required aria-required="true" aria-describedby="lf-desc-error">
-                        <span class="form-error" id="lf-desc-error" role="alert" aria-live="polite" hidden></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="lf-contact">Contact (Optional)</label>
-                        <input class="form-input" type="text" id="lf-contact" placeholder="e.g. ask 9B">
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Post Item</button>
-                    <p id="lf-result" class="result-msg" role="alert" aria-live="polite"></p>
+                    <div class="form-group"><label>Item Name</label><input type="text" id="lf-item" required placeholder="e.g. Blue Water Bottle"></div>
+                    <div class="form-group"><label>Last Seen / Found Location</label><input type="text" id="lf-loc" required placeholder="e.g. Room 402, Playground"></div>
+                    <div class="form-group"><label>Description</label><input type="text" id="lf-desc" maxlength="100" required placeholder="Any unique identifiers?"></div>
+                    <div class="form-group"><label>Contact Method (Optional)</label><input type="text" id="lf-contact" placeholder="e.g. Drop at Reception, See 9B"></div>
+                    <button type="submit" class="btn btn-primary w-100"><i data-lucide="plus-circle"></i> Post to Board</button>
+                    <p id="lf-result" class="result-msg"></p>
                 </form>
             </div>
-            <div class="tabs">
-                <button class="tab-btn active" type="button" onclick="switchLFTab('Lost')">Lost Items</button>
-                <button class="tab-btn" type="button" onclick="switchLFTab('Found')">Found Items</button>
+
+            <div class="tabs" style="justify-content: center; border: none; background: #f1f5f9; padding: 0.5rem; border-radius: 16px; margin-bottom: 3rem; width: fit-content; margin-left: auto; margin-right: auto;">
+                <button class="tab-btn active" onclick="switchLFTab('Lost')" style="padding: 0.75rem 2rem; border-radius: 12px; border: none;">Lost Items</button>
+                <button class="tab-btn" onclick="switchLFTab('Found')" style="padding: 0.75rem 2rem; border-radius: 12px; border: none;">Found Items</button>
             </div>
-            <div id="lf-list"></div>
+            <div id="lf-list" class="features">Loading...</div>
         </section>
 
         <!-- Study Groups Page -->
-        <section id="study-groups" class="page" aria-labelledby="study-groups-title">
-            <h2 id="study-groups-title" class="text-fire"><i data-lucide="users"></i> Learn Together. Rise Together.</h2>
-            <p>Find study partners or share notes. Posts expire after 7 days.</p>
-            <div class="card form-container">
-                <form id="sg-form" aria-label="Create a study group request" novalidate>
-                    <div class="form-group">
-                        <label for="sg-subj">Subject</label>
-                        <input class="form-input" type="text" id="sg-subj" required aria-required="true" aria-describedby="sg-subj-error">
-                        <span class="form-error" id="sg-subj-error" role="alert" aria-live="polite" hidden></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="sg-topic">Topic / Chapter</label>
-                        <input class="form-input" type="text" id="sg-topic" required aria-required="true" aria-describedby="sg-topic-error">
-                        <span class="form-error" id="sg-topic-error" role="alert" aria-live="polite" hidden></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="sg-look">Looking For</label>
-                        <input class="form-input" type="text" id="sg-look" placeholder="Study partner, notes..." required aria-required="true" aria-describedby="sg-look-error">
-                        <span class="form-error" id="sg-look-error" role="alert" aria-live="polite" hidden></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="sg-grade">Grade / Class</label>
-                        <input class="form-input" type="text" id="sg-grade" required aria-required="true" aria-describedby="sg-grade-error">
-                        <span class="form-error" id="sg-grade-error" role="alert" aria-live="polite" hidden></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="sg-time">Preferred Time</label>
-                        <input class="form-input" type="text" id="sg-time" placeholder="Weekends, Afternoons..." required aria-required="true" aria-describedby="sg-time-error">
-                        <span class="form-error" id="sg-time-error" role="alert" aria-live="polite" hidden></span>
-                    </div>
+        <section id="study-groups" class="page">
+            <h2 class="text-fire"><i data-lucide="users"></i> Learn Together. Rise Together.</h2>
+            <p style="margin-bottom: 2rem;">Find study partners or share notes. Posts expire after 7 days.</p>
+            
+            <div class="card form-container" style="margin-bottom: 2rem;">
+                <form id="sg-form">
+                    <div class="form-group"><label>Subject</label><input type="text" id="sg-subj" required></div>
+                    <div class="form-group"><label>Topic / Chapter</label><input type="text" id="sg-topic" required></div>
+                    <div class="form-group"><label>Looking For</label><input type="text" id="sg-look" placeholder="Study partner, notes..." required></div>
+                    <div class="form-group"><label>Grade / Class</label><input type="text" id="sg-grade" required></div>
+                    <div class="form-group"><label>Preferred Time</label><input type="text" id="sg-time" placeholder="Weekends, Afternoons..." required></div>
                     <button type="submit" class="btn btn-secondary w-100">Post Request</button>
-                    <p id="sg-result" class="result-msg" role="alert" aria-live="polite"></p>
+                    <p id="sg-result" class="result-msg"></p>
                 </form>
             </div>
-            <div id="sg-list" class="pinboard"></div>
+
+            <div id="sg-list" class="pinboard">Loading...</div>
         </section>
     </main>
 
     <footer>
-        <nav class="footer-content" aria-label="Footer navigation">
+        <div class="footer-content">
             <div class="footer-col">
-                <h4>Quick Links</h4>
-                <a href="#home" onclick="navigate('home')">Home</a>
-                <a href="#about" onclick="navigate('about')">About the Student Council</a>
-                <a href="#manifesto" onclick="navigate('manifesto')">Our Commitments to Students</a>
+                <div class="logo" style="margin-bottom: 2rem; color: white;">
+                    <img src="https://www.scis.co.in/images/SCISLogo-green.png" alt="SCIS Logo" style="height: 50px; width: auto; filter: brightness(0) invert(1);">
+                    <span class="brand" style="background: none; -webkit-text-fill-color: white;">SCIS Student Portal</span>
+                </div>
+                <p style="font-size: 0.9rem; line-height: 1.8;">Dedicated to transparent governance, student welfare, and school improvement. Shaping a better, safer, and more inclusive future together.</p>
             </div>
             <div class="footer-col">
-                <h4>Engage</h4>
-                <a href="#polls" onclick="navigate('polls')">Polls</a>
-                <a href="#idea-box" onclick="navigate('idea-box')">Idea Box</a>
-                <a href="#feedback" onclick="navigate('feedback')">Speak Anonymously</a>
+                <h4>Quick Access</h4>
+                <a href="#home" onclick="navigate('home')">Home Page</a>
+                <a href="#about" onclick="navigate('about')">About the Council</a>
+                <a href="#manifesto" onclick="navigate('manifesto')">Our Principles</a>
+                <a href="/admin">Admin Panel</a>
             </div>
             <div class="footer-col">
-                <h4>Track & Progress</h4>
+                <h4>Engagement</h4>
+                <a href="#polls" onclick="navigate('polls')">Active Polls</a>
+                <a href="#idea-box" onclick="navigate('idea-box')">Submit an Idea</a>
+                <a href="#feedback" onclick="navigate('feedback')">Anonymous Feedback</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support & Tools</h4>
                 <a href="#track" onclick="navigate('track')">Universal Tracker</a>
-                <a href="#progress" onclick="navigate('progress')">Task Board</a>
+                <a href="#progress" onclick="navigate('progress')">Initiatives Progress</a>
                 <a href="#lost-found" onclick="navigate('lost-found')">Lost & Found</a>
                 <a href="#study-groups" onclick="navigate('study-groups')">Study Groups</a>
-                <a href="/admin">Admin Portal</a>
             </div>
-        </nav>
+        </div>
         <div class="footer-bottom">
-            <div style="display:flex; align-items:center; gap:8px;">
-                Built by the <span class="footer-brand">Student Voice Platform</span> team 
+            <div>&copy; 2026 SCIS Student Portal. Built with <i data-lucide="heart" size="14" class="text-fire"></i> for the students.</div>
+            <div style="display: flex; gap: 2rem; align-items: center;">
+                <a href="#" onclick="window.location.replace('https://www.google.com')" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; opacity: 0.7;"><i data-lucide="log-out" size="16"></i> Secure Exit</a>
             </div>
-            <div>&copy; 2026 Student Council. All rights reserved.</div>
-            <a href="#" onclick="window.location.replace('https://www.google.com')" style="color:#888888; text-decoration:none; display:flex; align-items:center; gap:4px;"><i data-lucide="log-out" size="14"></i> Quick Exit</a>
         </div>
     </footer>
 
     <button class="quick-exit" onclick="window.location.replace('https://www.google.com')" title="Leave this page instantly"><i data-lucide="x" size="16"></i> Quick Exit</button>
 
-    <script src="https://unpkg.com/lucide@latest" defer></script>
-    <script src="/static/wordlist.js" defer></script>
-    <script src="/static/filter.js" defer></script>
-    <script src="/static/app.js" defer></script>
+    <script src="/static/app.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() { lucide.createIcons(); });
+        lucide.createIcons();
     </script>
 </body>
 </html>
