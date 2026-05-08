@@ -46,7 +46,7 @@
       <a href="/" class="logo" aria-label="Home">
         <div style="display:flex; align-items:center; gap:12px;">
             <div class="school-logo-placeholder" aria-label="School Logo">
-              <svg viewBox="0 0 48 48" width="48" height="48">
+              <svg viewBox="0 0 48 48" height="48">
                 <circle cx="24" cy="24" r="22" fill="none" 
                   stroke="var(--color-primary)" stroke-width="2"/>
                 <text x="24" y="28" text-anchor="middle" 
@@ -226,7 +226,7 @@
                 </div>
                 <div class="form-group">
                     <label for="f-message">Message</label>
-                    <textarea id="f-message" rows="5" required aria-required="true" placeholder="Describe your concern..." autocomplete="off" aria-describedby="f-message-error"></textarea>
+                    <textarea class="form-textarea" id="f-message" rows="5" required aria-required="true" placeholder="Describe your concern..." autocomplete="off" aria-describedby="f-message-error"></textarea>
                     <span class="form-error" id="f-message-error" role="alert" aria-live="polite" hidden></span>
                 </div>
                 <div class="form-group">
@@ -240,7 +240,7 @@
                 </div>
                 <div class="form-group">
                     <label for="f-grade">Grade/Class (Optional)</label>
-                    <input type="text" id="f-grade" placeholder="e.g. 10th Grade" aria-describedby="f-grade-error">
+                    <input class="form-input" type="text" id="f-grade" placeholder="e.g. 10th Grade" aria-describedby="f-grade-error">
                     <span class="form-error" id="f-grade-error" role="alert" aria-live="polite" hidden></span>
                 </div>
                 <button type="submit" class="btn btn-primary w-100" id="submit-feedback-btn">Submit Feedback</button>
@@ -254,7 +254,7 @@
             <article class="card form-container card-info" aria-label="Case tracking tool">
                 <div class="form-group">
                     <label for="t-caseid">Enter your ID</label>
-                    <input type="text" id="t-caseid" placeholder="e.g. FI-8K29Q, ID-XXXXX, LF-XXXXX, SG-XXXXX" aria-describedby="t-caseid-hint t-caseid-error">
+                    <input class="form-input" type="text" id="t-caseid" placeholder="e.g. FI-8K29Q, ID-XXXXX, LF-XXXXX, SG-XXXXX" aria-describedby="t-caseid-hint t-caseid-error">
                     <span class="form-hint" id="t-caseid-hint">Enter the case ID you received when submitting</span>
                     <span class="form-error" id="t-caseid-error" role="alert" aria-live="polite" hidden></span>
                 </div>
@@ -336,12 +336,12 @@
             <form id="idea-form" class="card form-container" aria-label="Submit a new idea" novalidate>
                 <div class="form-group">
                     <label for="i-title">Title of Idea (Max 60 chars)</label>
-                    <input type="text" id="i-title" maxlength="60" required aria-required="true" aria-describedby="i-title-error">
+                    <input class="form-input" type="text" id="i-title" maxlength="60" required aria-required="true" aria-describedby="i-title-error">
                     <span class="form-error" id="i-title-error" role="alert" aria-live="polite" hidden></span>
                 </div>
                 <div class="form-group">
                     <label for="i-desc">Description (Max 300 chars)</label>
-                    <textarea id="i-desc" rows="3" maxlength="300" required aria-required="true" aria-describedby="i-desc-error"></textarea>
+                    <textarea class="form-textarea" id="i-desc" rows="3" maxlength="300" required aria-required="true" aria-describedby="i-desc-error"></textarea>
                     <span class="form-error" id="i-desc-error" role="alert" aria-live="polite" hidden></span>
                 </div>
                 <div class="form-group">
@@ -386,22 +386,22 @@
                     </div>
                     <div class="form-group">
                         <label for="lf-item">Item Name</label>
-                        <input type="text" id="lf-item" required aria-required="true" aria-describedby="lf-item-error">
+                        <input class="form-input" type="text" id="lf-item" required aria-required="true" aria-describedby="lf-item-error">
                         <span class="form-error" id="lf-item-error" role="alert" aria-live="polite" hidden></span>
                     </div>
                     <div class="form-group">
                         <label for="lf-loc">Location</label>
-                        <input type="text" id="lf-loc" required aria-required="true" aria-describedby="lf-loc-error">
+                        <input class="form-input" type="text" id="lf-loc" required aria-required="true" aria-describedby="lf-loc-error">
                         <span class="form-error" id="lf-loc-error" role="alert" aria-live="polite" hidden></span>
                     </div>
                     <div class="form-group">
                         <label for="lf-desc">Description (100 chars)</label>
-                        <input type="text" id="lf-desc" maxlength="100" required aria-required="true" aria-describedby="lf-desc-error">
+                        <input class="form-input" type="text" id="lf-desc" maxlength="100" required aria-required="true" aria-describedby="lf-desc-error">
                         <span class="form-error" id="lf-desc-error" role="alert" aria-live="polite" hidden></span>
                     </div>
                     <div class="form-group">
                         <label for="lf-contact">Contact (Optional)</label>
-                        <input type="text" id="lf-contact" placeholder="e.g. ask 9B">
+                        <input class="form-input" type="text" id="lf-contact" placeholder="e.g. ask 9B">
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Post Item</button>
                     <p id="lf-result" class="result-msg" role="alert" aria-live="polite"></p>
@@ -422,27 +422,27 @@
                 <form id="sg-form" aria-label="Create a study group request" novalidate>
                     <div class="form-group">
                         <label for="sg-subj">Subject</label>
-                        <input type="text" id="sg-subj" required aria-required="true" aria-describedby="sg-subj-error">
+                        <input class="form-input" type="text" id="sg-subj" required aria-required="true" aria-describedby="sg-subj-error">
                         <span class="form-error" id="sg-subj-error" role="alert" aria-live="polite" hidden></span>
                     </div>
                     <div class="form-group">
                         <label for="sg-topic">Topic / Chapter</label>
-                        <input type="text" id="sg-topic" required aria-required="true" aria-describedby="sg-topic-error">
+                        <input class="form-input" type="text" id="sg-topic" required aria-required="true" aria-describedby="sg-topic-error">
                         <span class="form-error" id="sg-topic-error" role="alert" aria-live="polite" hidden></span>
                     </div>
                     <div class="form-group">
                         <label for="sg-look">Looking For</label>
-                        <input type="text" id="sg-look" placeholder="Study partner, notes..." required aria-required="true" aria-describedby="sg-look-error">
+                        <input class="form-input" type="text" id="sg-look" placeholder="Study partner, notes..." required aria-required="true" aria-describedby="sg-look-error">
                         <span class="form-error" id="sg-look-error" role="alert" aria-live="polite" hidden></span>
                     </div>
                     <div class="form-group">
                         <label for="sg-grade">Grade / Class</label>
-                        <input type="text" id="sg-grade" required aria-required="true" aria-describedby="sg-grade-error">
+                        <input class="form-input" type="text" id="sg-grade" required aria-required="true" aria-describedby="sg-grade-error">
                         <span class="form-error" id="sg-grade-error" role="alert" aria-live="polite" hidden></span>
                     </div>
                     <div class="form-group">
                         <label for="sg-time">Preferred Time</label>
-                        <input type="text" id="sg-time" placeholder="Weekends, Afternoons..." required aria-required="true" aria-describedby="sg-time-error">
+                        <input class="form-input" type="text" id="sg-time" placeholder="Weekends, Afternoons..." required aria-required="true" aria-describedby="sg-time-error">
                         <span class="form-error" id="sg-time-error" role="alert" aria-live="polite" hidden></span>
                     </div>
                     <button type="submit" class="btn btn-secondary w-100">Post Request</button>
