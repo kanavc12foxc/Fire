@@ -4,44 +4,48 @@
    ============================================================ */
 
 :root {
-    --color-bg-primary:    #0D1117;
-    --color-bg-secondary:  #161B22;
-    --color-bg-tertiary:   #21262D;
-    --color-border:        #30363D;
-
-    --color-fire:          #F4622A;
-    --color-fire-dim:      #7A3118;
-    --color-fire-glow:     rgba(244, 98, 42, 0.15);
-
-    --color-ice:           #58A6FF;
-    --color-ice-dim:       #1C3A6E;
-    --color-ice-glow:      rgba(88, 166, 255, 0.15);
-
-    --color-text-primary:  #E6EDF3;
-    --color-text-secondary:#8B949E;
-    --color-text-muted:    #484F58;
-
-    --color-success:       #3FB950;
-    --color-warning:       #D29922;
-    --color-danger:        #F85149;
-    --color-neutral:       #8B949E;
+    --color-primary:      #2D6A2D;   /* SCIS forest green — primary */
+    --color-primary-dark: #1E4D1E;   /* darker green for hover states */
+    --color-primary-light:#E8F4E8;   /* light green tint for backgrounds */
+    --color-accent:       #C8960C;   /* warm gold — secondary accent */
+    --color-accent-light: #FDF6E3;   /* gold tint */
+    --color-bg:           #FFFFFF;   /* white background */
+    --color-bg-alt:       #F7F9F7;   /* very subtle green-tinted off-white */
+    --color-text:         #1A1A1A;   /* near black */
+    --color-text-muted:   #5A6A5A;   /* muted green-grey */
+    --color-border:       #E0EAE0;   /* soft green border */
+    --color-success:      #2D6A2D;   /* green */
+    --color-warning:      #C8960C;   /* gold */
+    --color-danger:       #C0392B;   /* red */
+    --color-neutral:      #6B7B6B;   /* grey-green */
 
     /* Legacy aliases for JS-injected styles */
-    --fire-color:          #F4622A;
-    --fire-hover:          #e05320;
-    --fire-tint:           rgba(244, 98, 42, 0.12);
-    --ice-color:           #58A6FF;
-    --ice-hover:           #4d95ee;
-    --ice-tint:            rgba(88, 166, 255, 0.12);
-    --bg-color:            #0D1117;
-    --text-heading:        #E6EDF3;
-    --text-body:           #8B949E;
-    --text-label:          #484F58;
-    --text-muted:          #484F58;
-    --card-bg:             #161B22;
+    --color-bg-primary:    var(--color-bg);
+    --color-bg-secondary:  var(--color-bg-alt);
+    --color-bg-tertiary:   var(--color-bg-alt);
+    --color-fire:          var(--color-primary);
+    --color-fire-dim:      var(--color-primary-dark);
+    --color-fire-glow:     var(--color-primary-light);
+    --color-ice:           var(--color-accent);
+    --color-ice-dim:       var(--color-accent);
+    --color-ice-glow:      var(--color-accent-light);
+    --color-text-primary:  var(--color-text);
+    --color-text-secondary:var(--color-text-muted);
+
+    --fire-color:          var(--color-primary);
+    --fire-hover:          var(--color-primary-dark);
+    --fire-tint:           var(--color-primary-light);
+    --ice-color:           var(--color-accent);
+    --ice-hover:           var(--color-accent);
+    --ice-tint:            var(--color-accent-light);
+    --bg-color:            var(--color-bg);
+    --text-heading:        var(--color-text);
+    --text-body:           var(--color-text);
+    --text-label:          var(--color-text-muted);
+    --card-bg:             var(--color-bg);
     --border-radius:       4px;
-    --shadow:              0 1px 3px rgba(0,0,0,0.4);
-    --shadow-hover:        0 4px 16px rgba(0,0,0,0.5);
+    --shadow:              0 2px 8px rgba(0,0,0,0.06);
+    --shadow-hover:        0 4px 16px rgba(0,0,0,0.06);
 }
 
 ::selection {
@@ -61,7 +65,7 @@
 ::-webkit-scrollbar-thumb:hover { background: var(--color-text-muted); }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     background-color: var(--color-bg-primary);
     color: var(--color-text-secondary);
     line-height: 1.7;
@@ -76,7 +80,7 @@ body {
 
 /* ── TYPOGRAPHY ─────────────────────────────────────── */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Merriweather', serif;
     color: var(--color-text-primary);
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -101,9 +105,9 @@ h4 { font-size: 1rem; font-weight: 600; }
 .text-sm { font-size: 0.85rem; }
 .text-center { text-align: center; }
 
-.mono { font-family: 'JetBrains Mono', monospace; }
+.mono { font-family: 'Source Sans 3', sans-serif; }
 .label-tiny {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -112,7 +116,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 
 /* ── BREADCRUMB ─────────────────────────────────────── */
 .breadcrumb {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     color: var(--color-text-muted);
     padding: 6px 2rem;
@@ -144,7 +148,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 
 .logo .brand {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Merriweather', serif;
     font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -156,7 +160,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 .logo .brand-ice  { color: var(--color-ice); }
 
 .logo .brand-subtitle {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -172,7 +176,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 
 .nav-links a.nav-link {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     text-decoration: none;
     color: var(--color-text-muted);
     font-size: 12px;
@@ -198,7 +202,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     display: flex;
     align-items: center;
     gap: 6px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 10px;
     color: var(--color-success);
     letter-spacing: 0.06em;
@@ -282,10 +286,10 @@ h4 { font-size: 1rem; font-weight: 600; }
     justify-content: center;
     gap: 0.5rem;
     padding: 10px 24px;
-    border-radius: 3px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 500;
+    border-radius: 4px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.15s ease;
     border: 1px solid transparent;
@@ -295,22 +299,22 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 
 .btn-primary {
-    background-color: var(--color-fire);
-    color: #0D1117;
-    border-color: var(--color-fire);
+    background-color: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
 }
 .btn-primary:hover {
-    background-color: var(--fire-hover);
-    border-color: var(--fire-hover);
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
 }
 
 .btn-secondary {
-    background-color: transparent;
-    color: var(--color-ice);
-    border: 1px solid var(--color-ice);
+    background-color: white;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
 }
 .btn-secondary:hover {
-    background-color: var(--color-ice-glow);
+    background-color: var(--color-bg-alt);
 }
 
 .btn-nav-cta { padding: 6px 16px; font-size: 11px; }
@@ -323,7 +327,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 
 .hero-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -333,7 +337,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 
 .hero-headline {
     display: block;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Merriweather', serif;
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 700;
     letter-spacing: -0.03em;
@@ -345,7 +349,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 .hero-headline .line-ice  { color: var(--color-ice);  display: block; }
 
 .hero-tagline {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 15px;
     color: var(--color-text-secondary);
     line-height: 1.7;
@@ -379,7 +383,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 .hero-stat:last-child { border-right: none; }
 
 .hero-stat-number {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Merriweather', serif;
     font-size: 2rem;
     font-weight: 700;
     letter-spacing: -0.02em;
@@ -390,7 +394,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 .hero-stat-number.ice  { color: var(--color-ice); }
 
 .hero-stat-label {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -411,7 +415,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     margin-bottom: 1rem;
 }
 .section-header-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -426,15 +430,16 @@ h4 { font-size: 1rem; font-weight: 600; }
 
 /* ── CARDS ───────────────────────────────────────── */
 .card {
-    background: var(--color-bg-secondary);
+    background: white;
     padding: 20px 24px;
-    border-radius: 4px;
+    border-radius: 8px;
     border: 1px solid var(--color-border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     transition: border-color 0.2s;
 }
-.card:hover { border-color: #484F58; }
-.card-urgent { border-left: 3px solid var(--color-fire); }
-.card-info   { border-left: 3px solid var(--color-ice); }
+.card:hover { border-color: var(--color-primary-light); }
+.card-urgent { border-left: 3px solid var(--color-primary); }
+.card-info { border-left: 3px solid var(--color-accent); }
 
 /* ── DATA TABLE ──────────────────────────────────── */
 .data-table { 
@@ -446,7 +451,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     background: var(--color-bg-tertiary);
     padding: 10px 14px;
     text-align: left;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
@@ -464,14 +469,14 @@ h4 { font-size: 1rem; font-weight: 600; }
 .data-table tr:nth-child(even) td { background: var(--color-bg-tertiary); }
 .data-table tr:hover td { background: var(--color-fire-glow); }
 .data-table .td-id {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 12px;
     color: var(--color-fire);
 }
 
 /* ── STATUS BADGES ───────────────────────────────── */
 .badge, .status-badge, .impact-badge {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -483,15 +488,15 @@ h4 { font-size: 1rem; font-weight: 600; }
     gap: 4px;
     white-space: nowrap;
 }
-.badge-received,  .status-Received  { color: var(--color-neutral); border-color: var(--color-neutral); background: transparent; }
-.badge-review,    .status-Review    { color: var(--color-warning); border-color: var(--color-warning); background: transparent; }
-.badge-escalated, .status-Escalated { color: var(--color-danger);  border-color: var(--color-danger);  background: transparent; }
-.badge-resolved,  .status-Resolved  { color: var(--color-success); border-color: var(--color-success); background: transparent; }
+.badge-received, .status-Received { background: var(--color-neutral); color: white; border-color: var(--color-neutral); }
+.badge-review, .status-Review { background: var(--color-accent); color: white; border-color: var(--color-accent); }
+.badge-escalated, .status-Escalated { background: var(--color-danger); color: white; border-color: var(--color-danger); }
+.badge-resolved, .status-Resolved { background: var(--color-primary); color: white; border-color: var(--color-primary); }
 .badge-info    { color: var(--color-ice);     border-color: var(--color-ice);     background: transparent; }
 .badge-fire    { color: var(--color-fire);    border-color: var(--color-fire);    background: transparent; }
 .badge-warning { color: var(--color-warning); border-color: var(--color-warning); background: transparent; }
 .badge-success { color: var(--color-success); border-color: var(--color-success); background: transparent; }
-.badge-active  { color: var(--color-success); border-color: var(--color-success); background: transparent; }
+.badge-active { background: var(--color-primary); color: white; border-color: var(--color-primary); }
 .badge-priority { color: var(--color-fire); border-color: var(--color-fire); background: rgba(244,98,42,0.1); font-size: 9px; }
 
 .impact-Small  { color: var(--color-neutral); border-color: var(--color-neutral); background: transparent; }
@@ -506,7 +511,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 .form-group label {
     display: block;
     margin-bottom: 6px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     font-weight: 500;
     text-transform: uppercase;
@@ -521,7 +526,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     padding: 10px 14px;
     border: 1px solid var(--color-border);
     border-radius: 3px;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 14px;
     color: var(--color-text-primary);
     background-color: var(--color-bg-tertiary);
@@ -554,7 +559,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 .terminal-prefix {
     padding: 10px 12px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 13px;
     color: var(--color-text-muted);
     background: var(--color-bg-tertiary);
@@ -565,7 +570,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     flex: 1;
     border: none !important;
     background: transparent;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 14px;
     color: var(--color-fire);
     padding: 10px 14px;
@@ -590,7 +595,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     border-radius: 3px 3px 0 0;
 }
 .portal-header-title {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -598,7 +603,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     font-weight: 600;
 }
 .portal-header-sub {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 10px;
     color: var(--color-text-muted);
     margin-top: 3px;
@@ -617,7 +622,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     border-radius: 3px;
     padding: 16px 20px;
     margin-top: 1.5rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 13px;
     color: var(--color-text-secondary);
 }
@@ -631,8 +636,8 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 
 .result-msg { margin-top: 1rem; font-size: 0.9rem; text-align: center; }
-.success-text { color: var(--color-success); font-family: 'JetBrains Mono', monospace; font-size: 13px; }
-.error-text   { color: var(--color-danger);  font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+.success-text { color: var(--color-success); font-family: 'Source Sans 3', sans-serif; font-size: 13px; }
+.error-text   { color: var(--color-danger);  font-family: 'Source Sans 3', sans-serif; font-size: 13px; }
 
 /* ── TRACKING / CASE FILE ────────────────────────── */
 .tracking-box {
@@ -647,7 +652,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     background: var(--color-bg-tertiary);
     border-bottom: 1px solid var(--color-border);
     padding: 12px 16px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 12px;
     color: var(--color-text-muted);
     text-transform: uppercase;
@@ -655,11 +660,11 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 .tracking-details {
     padding: 16px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 13px;
 }
 .tracking-details h3 {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 16px;
     color: var(--color-fire);
     margin-bottom: 6px;
@@ -714,7 +719,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 .step-circle.pulsing { animation: pulseDot 2s infinite; border-color: var(--color-ice); }
 .step span {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 9px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -745,7 +750,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     align-items: center;
     gap: 8px;
     margin-bottom: 8px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -782,7 +787,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 .overall-progress { background: var(--color-bg-secondary); margin-bottom: 2rem; }
 .progress-stats { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
 .stat-pill {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     padding: 3px 10px;
     border-radius: 3px;
@@ -790,9 +795,9 @@ h4 { font-size: 1rem; font-weight: 600; }
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
-.stat-pill.completed  { color: var(--color-success); }
-.stat-pill.in-progress { color: var(--color-ice); }
-.stat-pill.planned    { color: var(--color-text-muted); border-color: var(--color-border); }
+.stat-pill.completed { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+.stat-pill.in-progress { background: var(--color-accent); color: white; border-color: var(--color-accent); }
+.stat-pill.planned { background: var(--color-neutral); color: white; border-color: var(--color-neutral); }
 
 /* ── ACTIVITY / RECENT FEED ──────────────────────── */
 .activity-section { margin-top: 3rem; }
@@ -814,7 +819,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 .manifesto-item:last-child { border-bottom: none; }
 .manifesto-num {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Merriweather', serif;
     font-size: 2rem;
     font-weight: 700;
     color: var(--color-bg-tertiary);
@@ -825,7 +830,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 .manifesto-body { flex: 1; }
 .manifesto-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Merriweather', serif;
     font-size: 15px;
     font-weight: 600;
     color: var(--color-text-primary);
@@ -837,7 +842,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     line-height: 1.6;
 }
 .manifesto-status {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -872,10 +877,10 @@ h4 { font-size: 1rem; font-weight: 600; }
     flex: 1;
     font-size: 13px;
     color: var(--color-text-primary);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Source Sans 3', sans-serif;
 }
 .status-row-uptime {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     color: var(--color-text-muted);
 }
@@ -893,7 +898,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     padding: 20px;
 }
 .poll-referendum-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -914,7 +919,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     justify-content: flex-start !important;
     border-radius: 3px !important;
     padding: 10px 14px !important;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Source Sans 3', sans-serif !important;
     font-size: 13px !important;
     text-transform: none !important;
     letter-spacing: 0 !important;
@@ -926,7 +931,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     color: var(--color-text-primary) !important;
 }
 .poll-result-pct {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 13px;
     color: var(--color-ice);
 }
@@ -940,7 +945,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     flex-wrap: wrap;
 }
 .filter-btn {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -981,20 +986,20 @@ h4 { font-size: 1rem; font-weight: 600; }
 .task-status-icon.planned { background: transparent; border-color: var(--color-border); border-style: dashed; }
 .task-status-icon.blocked { background: var(--color-danger); border-color: var(--color-danger); }
 
-.task-title { flex: 1; font-size: 13px; color: var(--color-text-primary); font-family: 'Inter', sans-serif; }
+.task-title { flex: 1; font-size: 13px; color: var(--color-text-primary); font-family: 'Source Sans 3', sans-serif; }
 .task-assignee {
     width: 26px; height: 26px;
     background: var(--color-fire-dim);
     border-radius: 2px;
     display: flex; align-items: center; justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 10px;
     color: var(--color-fire);
     font-weight: 700;
     flex-shrink: 0;
 }
 .task-updated {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 10px;
     color: var(--color-text-muted);
     flex-shrink: 0;
@@ -1019,7 +1024,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     position: relative;
 }
 .timeline-date {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     color: var(--color-text-muted);
     min-width: 70px;
@@ -1039,7 +1044,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 .timeline-body { flex: 1; }
 .timeline-tag {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -1047,7 +1052,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     margin-bottom: 4px;
 }
 .timeline-title {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Merriweather', serif;
     font-size: 14px;
     font-weight: 600;
     color: var(--color-text-primary);
@@ -1066,7 +1071,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 }
 .idea-card.featured { border-left-color: var(--color-fire); }
 .idea-meta {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     color: var(--color-text-muted);
     margin-top: 0.75rem;
@@ -1103,7 +1108,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     border: none;
     border-bottom: 2px solid transparent;
     cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -1129,7 +1134,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     border-radius: 3px;
     color: var(--color-text-secondary);
     text-decoration: none;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -1143,7 +1148,7 @@ h4 { font-size: 1rem; font-weight: 600; }
 
 /* ── SUPPORT COUNTER ─────────────────────────────── */
 #support-counter {
-    font-family: 'Space Grotesk', sans-serif !important;
+    font-family: 'Merriweather', serif !important;
     font-size: 4rem !important;
     color: var(--color-ice) !important;
     justify-content: center;
@@ -1170,7 +1175,7 @@ h4 { font-size: 1rem; font-weight: 600; }
     border: 1px solid var(--color-border);
     padding: 8px 16px;
     border-radius: 3px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     font-weight: 500;
     cursor: pointer;
@@ -1202,13 +1207,13 @@ footer {
     flex-wrap: wrap;
 }
 .footer-brand-mark {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Merriweather', serif;
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: -0.02em;
 }
 .footer-tagline {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     color: var(--color-text-muted);
     margin-top: 4px;
@@ -1219,7 +1224,7 @@ footer {
     list-style: none;
 }
 .footer-links a {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -1294,7 +1299,7 @@ footer {
     }
     .nav-links.nav-open { left: 0; }
     .nav-links a.nav-link {
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Merriweather', serif;
         font-size: 16px;
         text-transform: none;
         letter-spacing: 0;
@@ -1314,7 +1319,23 @@ footer {
     }
     .hero-stats { grid-template-columns: repeat(2,1fr); }
     .hero-buttons { flex-direction: column; }
-    .btn { width: 100%; }
+    .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
     .nav-live { display: none; }
     .timeline::before { left: 60px; }
     .timeline-date { min-width: 50px; font-size: 10px; }
@@ -1335,7 +1356,7 @@ footer {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.06em;
@@ -1373,7 +1394,7 @@ footer {
     overflow-y: auto;
 }
 .admin-sidebar-title {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -1387,7 +1408,7 @@ footer {
     align-items: center;
     gap: 10px;
     padding: 10px 16px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -1404,7 +1425,7 @@ footer {
 .admin-sidebar-link.active { color: var(--color-fire); border-left-color: var(--color-fire); background: var(--color-fire-glow); }
 
 .admin-sidebar-counter {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 11px;
     color: var(--color-fire);
     padding: 16px;
@@ -1420,7 +1441,7 @@ footer {
 
 /* Admin action buttons */
 .btn-action {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Source Sans 3', sans-serif;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.04em;

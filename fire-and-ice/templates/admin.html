@@ -3,17 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fire & Ice Admin</title>
-  <meta name="description" content="Administrator portal for Fire & Ice campaign operations, submissions, polls, and tracking.">
+  <title>Admin Dashboard — Student Voice Platform</title>
+  <meta name="description" content="Internal management dashboard for Student Voice Platform platform operations, submissions, polls, and task tracking.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://fire-fgg8.onrender.com/admin">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Fire & Ice Admin">
-  <meta property="og:description" content="Administrator portal for Fire & Ice campaign operations, submissions, polls, and tracking.">
-  <meta property="og:url" content="https://fireandice.in/admin">
-  <meta property="og:site_name" content="Fire & Ice Admin">
+  <meta property="og:title" content="Admin Dashboard — Student Voice Platform">
+  <meta property="og:description" content="Internal management dashboard for Student Voice Platform platform operations.">
+  <meta property="og:url" content="https://fire-fgg8.onrender.com/admin">
+  <meta property="og:site_name" content="SCIS Student Voice Platform">
   <meta name="twitter:card" content="summary">
-  <link rel="canonical" href="https://fireandice.in/admin">
+  <meta name="theme-color" content="#F4622A">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     .admin-layout { display: none; }
     .login-layout { display: block; max-width: 420px; margin: 4rem auto; }
@@ -31,9 +35,7 @@
   <header class="navbar" role="banner">
     <nav aria-label="Admin navigation">
       <div class="logo">
-        <span class="brand-fire">Fire</span>
-        <span class="brand-amp">&</span>
-        <span class="brand-ice">Ice</span>
+        <span style="color:var(--color-primary); font-family:Merriweather; font-weight:bold; font-size:1.2rem;">SCIS Student Voice</span>
         <span class="brand-subtitle">ADMIN PORTAL</span>
       </div>
       <ul class="nav-links admin-layout" aria-label="Admin actions">
@@ -45,14 +47,15 @@
   <main id="main-content">
     <section id="login-section" class="login-layout card" aria-labelledby="admin-login-title">
       <h1 id="admin-login-title">Admin Login</h1>
-      <p>Use your secure administrator password to access campaign controls.</p>
-      <form id="login-form" aria-label="Administrator login form">
+      <p>Use your secure administrator password to access platform controls.</p>
+      <form id="login-form" aria-label="Administrator login form" novalidate>
         <div class="form-group">
           <label for="admin-pass">Password</label>
-          <input type="password" id="admin-pass" placeholder="Enter Admin Password" required>
+          <input type="password" id="admin-pass" placeholder="Enter Admin Password" required aria-required="true" autocomplete="current-password" aria-describedby="admin-pass-error">
+          <span class="form-error" id="admin-pass-error" role="alert" aria-live="polite" hidden></span>
         </div>
         <button type="submit" class="btn btn-primary w-100">Login</button>
-        <p id="login-msg" class="result-msg"></p>
+        <p id="login-msg" class="result-msg" role="alert" aria-live="polite"></p>
       </form>
     </section>
 
@@ -83,47 +86,52 @@
               <button class="tab-btn" onclick="loadSubmissions('study_groups')" type="button">Study Groups</button>
             </div>
             <div class="card table-responsive">
+              <div class="table-wrapper" role="region" aria-label="Submissions data table" tabindex="0">
               <table class="data-table" aria-label="Submission list">
                 <thead>
-                  <tr><th>ID</th><th>Details</th><th>Status / Priority</th><th>Action</th></tr>
+                  <tr><th scope="col">ID</th><th scope="col">Details</th><th scope="col">Status / Priority</th><th scope="col">Action</th></tr>
                 </thead>
                 <tbody id="submissions-table-body"><tr><td colspan="4">Loading...</td></tr></tbody>
               </table>
+              </div>
             </div>
           </div>
 
           <aside id="response-panel" class="card card-info" aria-label="Response panel" style="display:none;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
               <h3 id="panel-title">Respond to Case</h3>
-              <button class="btn" onclick="closeResponsePanel()" type="button"><i data-lucide="x"></i></button>
+              <button class="btn" onclick="closeResponsePanel()" type="button" aria-label="Close response panel"><i data-lucide="x"></i></button>
             </div>
             <p class="text-sm text-muted" id="panel-desc"></p>
-            <form id="response-form" aria-label="Update submission response">
+            <form id="response-form" aria-label="Update submission response" novalidate>
               <input type="hidden" id="r-table">
               <input type="hidden" id="r-id">
               <div class="form-group">
                 <label for="r-priority">Priority</label>
-                <select id="r-priority">
+                <select id="r-priority" aria-describedby="r-priority-error">
                   <option value="Low">Low</option>
                   <option value="Medium">Medium</option>
                   <option value="High">High</option>
                 </select>
+                <span class="form-error" id="r-priority-error" role="alert" aria-live="polite" hidden></span>
               </div>
               <div class="form-group">
                 <label for="r-status">Status</label>
-                <select id="r-status">
+                <select id="r-status" aria-describedby="r-status-error">
                   <option value="Received">Received</option>
                   <option value="Under Review">Under Review</option>
                   <option value="Escalated">Escalated</option>
                   <option value="Resolved">Resolved</option>
                 </select>
+                <span class="form-error" id="r-status-error" role="alert" aria-live="polite" hidden></span>
               </div>
               <div class="form-group">
                 <label for="r-response">Public Response</label>
-                <textarea id="r-response" rows="5" placeholder="Enter response visible to student..."></textarea>
+                <textarea id="r-response" rows="5" placeholder="Enter response visible to student..." aria-describedby="r-response-error"></textarea>
+                <span class="form-error" id="r-response-error" role="alert" aria-live="polite" hidden></span>
               </div>
               <button type="submit" class="btn btn-secondary w-100">Update Submission</button>
-              <p id="r-result" class="result-msg"></p>
+              <p id="r-result" class="result-msg" role="alert" aria-live="polite"></p>
             </form>
           </aside>
         </div>
@@ -133,15 +141,17 @@
         <h2 id="polls-manager-title">Polls Manager</h2>
         <div class="dashboard-grid">
           <div class="card table-responsive">
+            <div class="table-wrapper" role="region" aria-label="Polls data table" tabindex="0">
             <table class="data-table" aria-label="Poll list">
-              <thead><tr><th>Poll</th><th>Type</th><th>Status</th><th>Total Votes</th></tr></thead>
+              <thead><tr><th scope="col">Poll</th><th scope="col">Type</th><th scope="col">Status</th><th scope="col">Total Votes</th></tr></thead>
               <tbody id="polls-table-body"><tr><td colspan="4">Loading...</td></tr></tbody>
             </table>
+            </div>
           </div>
           <aside class="card">
             <h3>Create Poll</h3>
-            <form id="create-poll-form" aria-label="Create a new poll">
-              <div class="form-group"><label for="p-question">Question</label><input type="text" id="p-question" required></div>
+            <form id="create-poll-form" aria-label="Create a new poll" novalidate>
+              <div class="form-group"><label for="p-question">Question</label><input type="text" id="p-question" required aria-required="true" aria-describedby="p-question-error"><span class="form-error" id="p-question-error" role="alert" aria-live="polite" hidden></span></div>
               <div class="form-group">
                 <label for="p-type">Type</label>
                 <select id="p-type" onchange="togglePollOptions(this.value)">
@@ -152,7 +162,8 @@
               </div>
               <div class="form-group" id="p-options-container" style="display:none;">
                 <label for="p-options">Options (Comma separated)</label>
-                <input type="text" id="p-options" placeholder="e.g. Option 1, Option 2">
+                <input type="text" id="p-options" placeholder="e.g. Option 1, Option 2" aria-describedby="p-options-error">
+                <span class="form-error" id="p-options-error" role="alert" aria-live="polite" hidden></span>
               </div>
               <div class="form-group">
                 <label for="p-status">Status</label>
@@ -162,7 +173,7 @@
                 </select>
               </div>
               <button type="submit" class="btn btn-primary w-100">Create Poll</button>
-              <p id="p-result" class="result-msg"></p>
+              <p id="p-result" class="result-msg" role="alert" aria-live="polite"></p>
             </form>
           </aside>
         </div>
@@ -172,21 +183,23 @@
         <h2 id="task-control-title">Task Control</h2>
         <div class="dashboard-grid">
           <div class="card table-responsive">
+            <div class="table-wrapper" role="region" aria-label="Tasks data table" tabindex="0">
             <table class="data-table" aria-label="Task list">
-              <thead><tr><th>Title</th><th>Focus Area</th><th>Status</th><th>Assignee</th><th>Action</th></tr></thead>
+              <thead><tr><th scope="col">Title</th><th scope="col">Focus Area</th><th scope="col">Status</th><th scope="col">Assignee</th><th scope="col">Action</th></tr></thead>
               <tbody id="tasks-table-body"><tr><td colspan="5">Loading...</td></tr></tbody>
             </table>
+            </div>
           </div>
           <aside class="card">
             <h3>Create Task</h3>
-            <form id="create-task-form" aria-label="Create a new task">
-              <div class="form-group"><label for="tk-title">Title</label><input type="text" id="tk-title" required></div>
-              <div class="form-group"><label for="tk-focus">Focus Area</label><input type="text" id="tk-focus" placeholder="e.g. Student Safety" required></div>
-              <div class="form-group"><label for="tk-assignee">Assignee</label><input type="text" id="tk-assignee" placeholder="e.g. Amogh"></div>
+            <form id="create-task-form" aria-label="Create a new task" novalidate>
+              <div class="form-group"><label for="tk-title">Title</label><input type="text" id="tk-title" required aria-required="true" aria-describedby="tk-title-error"><span class="form-error" id="tk-title-error" role="alert" aria-live="polite" hidden></span></div>
+              <div class="form-group"><label for="tk-focus">Focus Area</label><input type="text" id="tk-focus" placeholder="e.g. Student Safety" required aria-required="true" aria-describedby="tk-focus-error"><span class="form-error" id="tk-focus-error" role="alert" aria-live="polite" hidden></span></div>
+              <div class="form-group"><label for="tk-assignee">Assignee</label><input type="text" id="tk-assignee" placeholder="e.g. John Doe"></div>
               <div class="form-group"><label for="tk-status">Status</label><select id="tk-status"><option value="Planned">Planned</option><option value="In Progress">In Progress</option><option value="Blocked">Blocked</option><option value="Completed">Completed</option></select></div>
               <div class="form-group"><label for="tk-subtasks">Subtasks (Comma separated)</label><input type="text" id="tk-subtasks"></div>
               <button type="submit" class="btn btn-secondary w-100">Create Task</button>
-              <p id="tk-result" class="result-msg"></p>
+              <p id="tk-result" class="result-msg" role="alert" aria-live="polite"></p>
             </form>
           </aside>
         </div>
@@ -195,11 +208,11 @@
       <section id="tab-announcements" class="admin-tab-content" style="display:none;" aria-labelledby="announcements-title">
         <h2 id="announcements-title">Post Announcement</h2>
         <div class="card form-container">
-          <form id="announcement-form" aria-label="Post a new announcement">
-            <div class="form-group"><label for="a-title">Title</label><input type="text" id="a-title" required></div>
-            <div class="form-group"><label for="a-desc">Description</label><textarea id="a-desc" rows="3" required></textarea></div>
+          <form id="announcement-form" aria-label="Post a new announcement" novalidate>
+            <div class="form-group"><label for="a-title">Title</label><input type="text" id="a-title" required aria-required="true" aria-describedby="a-title-error"><span class="form-error" id="a-title-error" role="alert" aria-live="polite" hidden></span></div>
+            <div class="form-group"><label for="a-desc">Description</label><textarea id="a-desc" rows="3" required aria-required="true" aria-describedby="a-desc-error"></textarea><span class="form-error" id="a-desc-error" role="alert" aria-live="polite" hidden></span></div>
             <button type="submit" class="btn btn-primary w-100">Post Announcement</button>
-            <p id="announcement-msg" class="result-msg"></p>
+            <p id="announcement-msg" class="result-msg" role="alert" aria-live="polite"></p>
           </form>
         </div>
       </section>
@@ -207,28 +220,34 @@
       <section id="tab-filter" class="admin-tab-content" style="display:none;" aria-labelledby="filter-logs-title">
         <h2 id="filter-logs-title">Filter Logs</h2>
         <div class="card table-responsive">
+          <div class="table-wrapper" role="region" aria-label="Content filter logs" tabindex="0">
           <table class="data-table" aria-label="Filter logs">
             <thead>
               <tr>
-                <th>Time</th>
-                <th>Form</th>
-                <th>Reason</th>
-                <th>Flagged Tokens</th>
-                <th>Submission Snippet</th>
-                <th>Action</th>
+                <th scope="col">Time</th>
+                <th scope="col">Form</th>
+                <th scope="col">Reason</th>
+                <th scope="col">Flagged Tokens</th>
+                <th scope="col">Submission Snippet</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody id="filter-logs-body"><tr><td colspan="6">Loading...</td></tr></tbody>
           </table>
+          </div>
         </div>
       </section>
 
       <footer class="footer-note">
-        <p>Admin portal for Fire & Ice campaign operations. <a href="/">Return to public site</a> • <a href="#" onclick="window.location.replace('https://www.google.com')">Quick Exit</a></p>
+        <p>Admin portal for Student Voice Platform platform operations. <a href="/">Return to public site</a> • <a href="#" onclick="window.location.replace('https://www.google.com')">Quick Exit</a></p>
       </footer>
     </section>
   </main>
 
-  <script src="/static/admin.js"></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <script src="/static/admin.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() { lucide.createIcons(); });
+  </script>
 </body>
 </html>
