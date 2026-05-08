@@ -1554,3 +1554,116 @@ table {
   padding: 16px 0 4px;
   list-style: none;
 }
+
+/* FORM MOBILE FIXES */
+.form-group {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  font-size: 16px; /* prevents iOS zoom */
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: white;
+  color: var(--color-text);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+.btn-full,
+.form-submit {
+  width: 100%;
+  display: block;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .form-page-container {
+    padding: 16px;
+    max-width: 100%;
+  }
+  .urgency-selector {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .urgency-option {
+    width: 100%;
+  }
+  .submission-form {
+    padding: 16px;
+  }
+  .btn {
+    min-height: 48px;
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+}
+
+/* CARD MOBILE FIXES */
+@media (max-width: 768px) {
+  .card,
+  .feature-card,
+  .idea-card,
+  .poll-card,
+  .status-card,
+  .announcement-card,
+  .lost-found-card,
+  .study-group-card {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 16px;
+  }
+  .cards-grid,
+  .features-grid,
+  .quick-links-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .stats-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .stat-number {
+    font-size: 2rem;
+  }
+}
+
+/* CASE FILE MOBILE FIX */
+@media (max-width: 768px) {
+  .case-file-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .case-details {
+    display: block;
+  }
+  .case-detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .status-stepper {
+    flex-direction: column;
+    gap: 0;
+  }
+  .status-step {
+    flex-direction: row;
+    gap: 12px;
+    padding: 12px 0;
+  }
+  .status-connector {
+    width: 2px;
+    height: 24px;
+    margin: 0 0 0 11px;
+  }
+}
