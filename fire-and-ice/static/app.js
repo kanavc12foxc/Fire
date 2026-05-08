@@ -766,3 +766,32 @@ function toggleTimeline() {
     }
     lucide.createIcons();
 }
+
+// MOBILE DRAWER LOGIC
+const hamburger = document.querySelector('.nav-hamburger');
+const drawer = document.querySelector('#nav-drawer');
+const overlay = document.querySelector('#nav-overlay');
+const drawerClose = document.querySelector('.nav-drawer-close');
+
+function openDrawer() {
+  if (!drawer || !overlay) return;
+  drawer.classList.add('is-open');
+  overlay.classList.add('is-visible');
+  hamburger?.setAttribute('aria-expanded', 'true');
+  drawer.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function closeDrawer() {
+  if (!drawer || !overlay) return;
+  drawer.classList.remove('is-open');
+  overlay.classList.remove('is-visible');
+  hamburger?.setAttribute('aria-expanded', 'false');
+  drawer.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+hamburger?.addEventListener('click', openDrawer);
+drawerClose?.addEventListener('click', closeDrawer);
+overlay?.addEventListener('click', closeDrawer);
+document.addEventListener('keydown', e => { 
+  if (e.key === 'Escape') closeDrawer(); 
+});

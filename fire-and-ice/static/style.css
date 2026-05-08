@@ -1,3 +1,7 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { overflow-x: hidden; }
+body { overflow-x: hidden; max-width: 100vw; }
+
 /* ============================================================
    FIRE & ICE — CIVIC MONITORING DASHBOARD
    Design inspired by digitalpratipakshya.com/gov-monitoring
@@ -1480,3 +1484,73 @@ footer {
 }
 
 .table-responsive { overflow-x: auto; width: 100%; }
+
+/* Mobile Fixes */
+img, video, iframe, embed, object {
+  max-width: 100%;
+  height: auto;
+}
+table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-links { display: none; }
+.nav-hamburger { display: flex; }
+
+@media (min-width: 769px) {
+  .nav-links { display: flex; }
+  .nav-hamburger { display: none; }
+  .nav-drawer { display: none; }
+}
+
+.nav-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: min(320px, 85vw);
+  height: 100vh;
+  height: 100dvh;
+  background: var(--color-bg);
+  border-left: 1px solid var(--color-border);
+  z-index: 1000;
+  overflow-y: auto;
+  transition: right 0.3s ease;
+  padding: 24px;
+}
+.nav-drawer.is-open {
+  right: 0;
+}
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.nav-overlay.is-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+.nav-drawer-link {
+  display: block;
+  padding: 14px 0;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  text-decoration: none;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+}
+.nav-drawer-section-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  padding: 16px 0 4px;
+  list-style: none;
+}
